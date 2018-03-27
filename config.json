@@ -1,0 +1,10 @@
+{
+  "fbclientID" :"983350675145720",
+"fbclientSecret" :"f41862d8a6a462fc3af5c3a734db391d",
+"fbcallbackURL" :"http://localhost:3000/auth/facebook/callback",
+"db_password":"jayesh.bidani",
+"lnconsumerKey":"86ybuqbbd9ec3f",
+"lnconsumerSecret":"tT67aD980gfekJm1",
+"lncallbackURL":"http://localhost:3000/auth/linkedin/callback"
+
+}

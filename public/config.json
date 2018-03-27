@@ -1,0 +1,10 @@
+{
+
+    "fbclientID" :"150367752328192",
+    "fbclientSecret" :"0a9caa476ba201d8dc43d17e245017e3",
+    "fbcallbackURL" :"http://ec2-18-218-169-184.us-east-2.compute.amazonaws.com/auth/facebook/callback",
+    "db_password":"root",
+    "lnconsumerKey":"86ybuqbbd9ec3f",
+    "lnconsumerSecret":"tT67aD980gfekJm1",
+    "lncallbackURL":"http://ec2-18-218-169-184.us-east-2.compute.amazonaws.com/auth/linkedin/callback" 
+}
