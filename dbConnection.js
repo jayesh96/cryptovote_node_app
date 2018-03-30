@@ -1,7 +1,6 @@
 const mysql = require('mysql');
 var config = require('./config.json');
 
-
 //create mysql connection pool
 var dbconnection = mysql.createPool({
 

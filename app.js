@@ -9,7 +9,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session  = require('express-session');
 var multer  =   require('multer');
-var mongo = require('mongodb');
+
 
 var app = express();
 var config = require('./config.json');
@@ -19,6 +19,7 @@ var path = require('path');
 
 
 var index = require('./routes/index');
+var vote = require('./routes/vote');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -41,6 +42,7 @@ app.use(session({
 
 
 app.use('/', index);
+app.use('/vote', vote);
 
 
 

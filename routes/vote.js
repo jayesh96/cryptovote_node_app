@@ -16,43 +16,23 @@ var storage =   multer.diskStorage({
 var upload = multer({ storage : storage })
 
 
-
-router.get('/login', function(req, res, next) {
-  // res.render('index', { title: 'Express' });
-  res.render('login', { title: 'Event Details' });
-});
-
-router.get('/signup', function(req, res, next) {
-  // res.render('index', { title: 'Express' });
-  res.render('signup', { title: 'Event Details' });
-});
-
-router.post('/upload', function(req, res, next) {
-  // res.render('index', { title: 'Express' });
-  console.log(req.body)
-  res.render('signup', { title: 'Event Details' });
-});
-
-
-
 router.get('/upload', function(req, res, next) {
   // res.render('index', { title: 'Express' });
   res.render('uploaddoc', { title: 'Event Details' });
 });
 
 
-
-
-router.get('/index', function(req, res, next) {
+router.get('/home', function(req, res, next) {
   // res.render('index', { title: 'Express' });
-  res.render('index', { title: 'Event Details' });
+  res.render('home', { title: 'Event Details' });
 });
-
-
-
-router.get('/index2', function(req, res, next) {
+router.get('/votenow', function(req, res, next) {
   // res.render('index', { title: 'Express' });
-  res.render('index2', { title: 'Event Details' });
+  res.render('votenow', { title: 'Event Details' });
+});
+router.get('/ballot', function(req, res, next) {
+  // res.render('index', { title: 'Express' });
+  res.render('ballot', { title: 'Event Details' });
 });
 
 

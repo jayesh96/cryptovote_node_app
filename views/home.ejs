@@ -10,17 +10,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <title>CryptoVote.io</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="../bower_components/Ionicons/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
-  <link rel="stylesheet" href="dist/css/skins/skin-blue.min.css">
+  <link rel="stylesheet" href="../dist/css/skins/skin-blue.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -53,7 +53,7 @@ desired effect
 |               | sidebar-mini                            |
 |---------------------------------------------------------|
 -->
-<body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
+<body class="hold-transition fixed skin-blue sidebar-mini sidebar-collapse">
 <div class="wrapper">
 
   <!-- Main Header -->
@@ -159,12 +159,16 @@ desired effect
 
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Recent Votes</h3>
+              <h3 class="box-title" style="color:#367fa9"><b>Recent Votes</b></h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
-              <table id='latest_transaction' class="table table-condensed ">
-                <tbody>
+              <table id="newTransactionTable" class="table table-condensed">
+                <tbody><tr>
+                  <th>Block</th>
+                  <th style="text-align:center !important" >Address</th>
+                  <th>Timestamp</th>
+                </tr>
 
 
               </tbody></table>
@@ -287,29 +291,28 @@ desired effect
 <!-- REQUIRED JS SCRIPTS -->
 
 <!-- jQuery 3 -->
-<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
-<script src="dist/js/adminlte.min.js"></script>
+<script src="../dist/js/adminlte.min.js"></script>
 
 <script>
-
-
-
-
 
 $(document).ready(function(){
   $.ajax({
           url: 'http://192.168.0.5:5000/chain',
           type: 'get',
           success: function(data){
-              var result = data.chain
-              for(i=1;i<20;i++){
-                var transactions = result[i].transactions
-                for(i=0;i<transactions.length;i++){
-                  $('#latest_transaction tbody').append('<tr><th style="width: 10px">#</th><th >'+(transactions[i].recipient).toString().substring(0,5)+'...</th><th>'+(transactions[i].sender).toString().substring(0,5)+'...</th><th style="width: 40px">'+'12:00:05'+'</th></tr>');
+
+
+              for(i=0;i<data.chain.length;i++){
+                for(j=0;j<data.chain[i].transactions.length;j++){
+                  console.log(data.chain[i].transactions[j])
+                  $('#newTransactionTable').append('<tr><td>'+parseInt(i)+'.</td><td>'+ (data.chain[i].transactions[j].recipient) +'</td><td>12:00:21</td></tr>')
+
                 }
+
               }
           },
 

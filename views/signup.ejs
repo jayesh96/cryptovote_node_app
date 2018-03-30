@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>CryptoVote.io|Login</title>
+  <title>CryptoVote.io|SignUp</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -17,8 +17,14 @@
   <!-- iCheck -->
   <link rel="stylesheet" href="plugins/iCheck/square/blue.css">
 
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
 
-
+  <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition login-page">
@@ -28,24 +34,36 @@
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Sign in to start your session</p>
-
-    <form action="index2.html" method="post">
+    <p class="login-box-msg">Sign up to start your session</p>
+    STEP 1/3
+    <form action="/upload" method="post">
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="Email">
+        <input type="text" class="form-control" name="full_name" value="" placeholder="Full name">
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+      </div>
+
+
+      <div class="form-group has-feedback">
+        <input type="email" class="form-control" name="email_" value="" placeholder="Email">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password">
+        <input type="password" class="form-control" name="password_" value="" placeholder="Password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
+      <div class="form-group has-feedback">
+        <input type="password" class="form-control" name="retype_password" value=""  placeholder="Retype Password">
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+
+
       <div class="row">
         <div class="col-xs-4">
 
         </div>
         <!-- /.col -->
         <div class="col-xs-8">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
         </div>
         <!-- /.col -->
       </div>
@@ -54,8 +72,7 @@
     <div class="social-auth-links text-center">
       <p>- OR -</p>
 
-      <a href="#" style="background-color:#00a7d0; color:white" class="btn btn-block btn-social btn-flat">Sign Up</a>
-      <a href="#" style="background-color:orange; color:white"  class="btn btn-block btn-social  btn-flat">First Time User</a>
+      <a href="#" style="background-color:#00a7d0; color:white" class="btn btn-block btn-social btn-flat">Sign In</a>
     </div>
     <!-- /.social-auth-links -->
 
