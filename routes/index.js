@@ -17,8 +17,16 @@ var upload = multer({ storage : storage })
 
 
 
+router.get('/', function(req, res, next) {
+  console.log("hello")
+  res.render('splash', { title: 'Event Details' });
+});
+
+
+
+
 router.get('/login', function(req, res, next) {
-  // res.render('index', { title: 'Express' });
+  console.log("hello")
   res.render('login', { title: 'Event Details' });
 });
 
@@ -27,9 +35,16 @@ router.get('/signup', function(req, res, next) {
   res.render('signup', { title: 'Event Details' });
 });
 
-router.post('/upload', function(req, res, next) {
+
+router.post('/signup', function(req, res, next) {
   // res.render('index', { title: 'Express' });
   console.log(req.body)
+  res.render('signup', { title: 'Event Details' });
+})
+
+
+router.post('/upload', function(req, res, next) {
+
   res.render('signup', { title: 'Event Details' });
 });
 
