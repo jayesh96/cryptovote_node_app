@@ -7,7 +7,7 @@ var dbconnection = mysql.createPool({
   connectionLimit : 100, //importantdbperb
   host:'localhost',
   user:'root',
-  database:'scoot',
+  database:'cryptovote',
   password: config.db_password,
   debug    :  false,
    timezone: 'utc'

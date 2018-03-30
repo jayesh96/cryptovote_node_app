@@ -15,6 +15,8 @@ var storage =   multer.diskStorage({
 });
 var upload = multer({ storage : storage })
 
+const modelVote = require('../models/vote.js');
+
 
 router.get('/upload', function(req, res, next) {
   // res.render('index', { title: 'Express' });
@@ -30,9 +32,32 @@ router.get('/votenow', function(req, res, next) {
   // res.render('index', { title: 'Express' });
   res.render('votenow', { title: 'Event Details' });
 });
+
+
 router.get('/ballot', function(req, res, next) {
-  // res.render('index', { title: 'Express' });
-  res.render('ballot', { title: 'Event Details' });
+  modelVote.getRegisterdParty(function(err, result){
+
+        if(err)
+        {
+
+       var obj= new Object();
+       obj.status=false;
+       obj.result=err.sqlMessage;
+
+       res.json(obj);
+     }
+     else
+     {
+
+
+       var obj= new Object();
+       obj.status=true;
+       obj.result=result;
+       console.log(obj.result.data)
+       res.render('ballot', { obj:obj });
+
+     }
+  });
 });
 
 

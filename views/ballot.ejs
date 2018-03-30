@@ -94,70 +94,26 @@ desired effect
 
         <section class="content">
 
+           <% for (var i = 0; i < obj.result.data.length; i++) { %>
           <div style="border-radius:20px; background-color:#367fa9 !important"class="info-box bg-yellow">
             <span style="border-radius:20px" class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
 
             <div class="info-box-content">
-              <span class="info-box-text">Bhartiya Janta Party</span>
-              <span class="info-box-number">BJP</span>
+              <span class="info-box-text"><%= obj.result.data[i].registered_name %></span>
+              <span class="info-box-number"><%= obj.result.data[i].short_name %></span>
 
               <div class="progress">
                 <div class="progress-bar" style="background:#000!important ;width: 100%"></div>
               </div>
               <span class="progress-description">
+                <input type='hidden' id='party_<%= obj.result.data[i].id %>' value='<%= obj.result.data[i].hash_address %>'>
                     <button style="background:red" value="VOTE">VOTE</button>
                   </span>
             </div>
             <!-- /.info-box-content -->
           </div>
-          <div style="border-radius:20px; background-color:#367fa9 !important"class="info-box bg-yellow">
-            <span style="border-radius:20px" class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
+          <% } %>
 
-            <div class="info-box-content">
-              <span class="info-box-text">Bhartiya Janta Party</span>
-              <span class="info-box-number">BJP</span>
-
-              <div class="progress">
-                <div class="progress-bar" style="background:#000!important ;width: 100%"></div>
-              </div>
-              <span class="progress-description">
-                    <button style="background:red" value="VOTE">VOTE</button>
-                  </span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <div style="border-radius:20px; background-color:#367fa9 !important"class="info-box bg-yellow">
-            <span style="border-radius:20px" class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Bhartiya Janta Party</span>
-              <span class="info-box-number">BJP</span>
-
-              <div class="progress">
-                <div class="progress-bar" style="background:#000!important ;width: 100%"></div>
-              </div>
-              <span class="progress-description">
-                    <button style="background:red" value="VOTE">VOTE</button>
-                  </span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <div style="border-radius:20px; background-color:#367fa9 !important"class="info-box bg-yellow">
-            <span style="border-radius:20px" class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Bhartiya Janta Party</span>
-              <span class="info-box-number">BJP</span>
-
-              <div class="progress">
-                <div class="progress-bar" style="background:#000!important ;width: 100%"></div>
-              </div>
-              <span class="progress-description">
-                    <button style="background:red" value="VOTE">VOTE</button>
-                  </span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
 
         </section>
 
