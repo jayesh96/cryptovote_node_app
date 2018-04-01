@@ -158,6 +158,7 @@ desired effect
           <!-- /.box -->
 
           <div class="box">
+
             <div class="box-header">
               <h3 class="box-title" style="color:#367fa9"><b>Recent Votes</b></h3>
             </div>
@@ -169,6 +170,9 @@ desired effect
                   <th style="text-align:center !important" >Address</th>
                   <th>Timestamp</th>
                 </tr>
+                <div id='refresh-button' style="display:None">
+                <i  class="fa fa-refresh fa-spin"></i>Please Wait While Blocks Loads!
+              </div>
 
 
               </tbody></table>
@@ -303,11 +307,16 @@ $(document).ready(function(){
   $.ajax({
           url: 'http://192.168.0.5:5000/chain',
           type: 'get',
+          cache:true,
+          beforeSend: function()
+          {
+              document.getElementById('refresh-button').style.display = 'block';
+          },
           success: function(data){
-
-
+              document.getElementById('refresh-button').style.display = 'None';
+              console.log(data)
               for(i=0;i<data.chain.length;i++){
-                for(j=0;j<data.chain[i].transactions.length;j++){
+                for(j=0;j<data.chain[i].transactions.length-1;j++){
                   console.log(data.chain[i].transactions[j])
                   $('#newTransactionTable').append('<tr><td>'+parseInt(i)+'.</td><td>'+ (data.chain[i].transactions[j].recipient) +'</td><td>12:00:21</td></tr>')
 
