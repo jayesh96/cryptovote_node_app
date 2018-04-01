@@ -34,6 +34,28 @@ router.get('/votenow', function(req, res, next) {
 });
 
 
+router.post('/makeVoteTransaction',function(req, res,next){
+  var request = require('request');
+  myJSONObject = {
+      "sender": "dsdsdddddddddddddsdsdsds2we232sdsd",
+      "recipient": "dsd322323sdsdsds",
+      "amount": "1",
+      "data": "Some Data passed"
+  }
+
+  request({
+    url: "http://192.168.0.5:5000/transactions/new",
+    method: "POST",
+    json: true,   // <--Very important!!!
+    body: myJSONObject
+}, function (error, response, body){
+    console.log(response);
+    res.json(true)
+});
+
+
+})
+
 router.get('/ballot', function(req, res, next) {
   modelVote.getRegisterdParty(function(err, result){
 

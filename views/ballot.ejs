@@ -106,8 +106,8 @@ desired effect
                 <div class="progress-bar" style="background:#000!important ;width: 100%"></div>
               </div>
               <span class="progress-description">
-                <input type='hidden' id='party_<%= obj.result.data[i].id %>' value='<%= obj.result.data[i].hash_address %>'>
-                    <button style="background:red" value="VOTE">VOTE</button>
+                <input styyl type='hidden' id='party_<%= obj.result.data[i].id %>' value='<%= obj.result.data[i].hash_address %>'>
+                    <input class='vote_button' type="button" id='party_<%= obj.result.data[i].id %>' style="background:red" onclick="add_transaction('<%= obj.result.data[i].hash_address %>')"  value="VOTE"></input>
                   </span>
             </div>
             <!-- /.info-box-content -->
@@ -239,6 +239,33 @@ desired effect
 <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
+
+
+<script type="text/javascript">
+
+function add_transaction(party_id){
+
+
+    $.ajax({
+            type: 'POST',
+            url: 'http://192.168.0.5:3000/vote/makeVoteTransaction',
+            data: {
+                "sender": "dsdsdsdsdsds2we232sdsd",
+                "recipient": party_id,
+                "amount": "1",
+                "data": "Some Data passed"
+              },
+            beforeSend:function(data){
+              $("input[type=button]").attr("disabled", "disabled");
+            },
+
+            success: function(data) {
+                alert("You Have Successfully Voted")
+            }
+        });
+
+}
+</script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
