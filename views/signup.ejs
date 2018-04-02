@@ -31,12 +31,11 @@
 <div class="login-box">
   <div class="login-logo">
     <b> CryptoVote.io</b>
+    <p>Register Here</p>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Sign up to start your session</p>
-    STEP 1/3
-    <form action="/signup" method="post">
+        <form action="/signup" method="post">
       <div class="form-group has-feedback">
         <input type="text" class="form-control" name="full_name" value="" placeholder="Full name">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -52,8 +51,27 @@
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" name="retype_password" value=""  placeholder="Retype Password">
-        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        <input type="text" class="form-control" name="phone_np" value=""  placeholder="Mobile No.">
+        <span class="glyphicon glyphicon-phone form-control-feedback"></span>
+      </div>
+
+      <p><b>Upload Your Government Identification Here</b></p>
+
+
+
+      <div class="form-group">
+        <select class="form-control" id="sel1">
+          <option>Aadhar Card</option>
+          <option>Passport</option>
+          <option>Voter Id Card</option>
+          <option>Others</option>
+        </select>
+
+      </div>
+
+      <div class="form-group has-feedback">
+        <input type="file" class="form-control" placeholder="Upload">
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
 
 
@@ -64,7 +82,6 @@
         <!-- /.col -->
         <div class="col-xs-8">
           <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
-          <a href="/upload">NEXT</a>
         </div>
         <!-- /.col -->
       </div>

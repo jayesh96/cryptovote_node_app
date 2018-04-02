@@ -10,6 +10,28 @@ var bodyParser = require('body-parser');
 var session  = require('express-session');
 var multer  =   require('multer');
 
+var passport = require('passport')
+  , LocalStrategy = require('passport-local').Strategy;
+
+
+	passport.serializeUser(function(user, done) {
+	  done(null, user);
+	});
+
+	passport.deserializeUser(function(user, done) {
+	  done(null, user);
+	});
+
+
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+		console.log(username,password,"---->")
+    return done(null, true);
+  }
+));
+
+
+
 
 var app = express();
 var config = require('./config.json');
@@ -40,9 +62,17 @@ app.use(session({
 	saveUninitialized: true
  } )); // session secret
 
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', index);
 app.use('/vote', vote);
+
+app.post('/loginn',
+  passport.authenticate('local', { successRedirect: '/vote/home',
+                                   failureRedirect: '/22n',
+                                    })
+);
 
 
 

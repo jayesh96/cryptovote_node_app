@@ -78,7 +78,7 @@ desired effect
     <!-- Content Header (Page header) -->
 
     <section class="content-header">
-      <button type="button" class="btn bg-maroon margin">April 1, 2018</button>
+      <button type="button" class="btn bg-maroon margin">April 2, 2018</button>
       <button type="button" class="btn bg-maroon margin">General Elections</button>
       <div class="callout callout-success">
                 <h4>Your Own Decentralized Voting App</h4>
@@ -248,12 +248,9 @@ function add_transaction(party_id){
 
     $.ajax({
             type: 'POST',
-            url: 'http://192.168.0.5:3000/vote/makeVoteTransaction',
+            url: 'http://54.208.175.231:3000/vote/makeVoteTransaction',
             data: {
-                "sender": "dsdsdsdsdsds2we232sdsd",
                 "recipient": party_id,
-                "amount": "1",
-                "data": "Some Data passed"
               },
             beforeSend:function(data){
               $("input[type=button]").attr("disabled", "disabled");

@@ -78,7 +78,7 @@ desired effect
     <!-- Content Header (Page header) -->
 
     <section class="content-header">
-      <button type="button" class="btn bg-maroon margin">April 1, 2018</button>
+      <button type="button" class="btn bg-maroon margin">April 2, 2018</button>
       <button type="button" class="btn bg-maroon margin">General Elections</button>
       <div class="callout callout-success">
                 <h4>Your Own Decentralized Voting App</h4>
@@ -95,7 +95,7 @@ desired effect
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>150</h3>
+              <h3>1</h3>
 
               <p>Bhartiya Janta Party</p>
             </div>
@@ -109,7 +109,7 @@ desired effect
         <!-- small box -->
         <div class="small-box bg-green">
           <div class="inner">
-            <h3>150</h3>
+            <h3>2</h3>
 
             <p>Indian National Congress</p>
           </div>
@@ -122,7 +122,7 @@ desired effect
         <!-- small box -->
         <div class="small-box bg-green">
           <div class="inner">
-            <h3>150</h3>
+            <h3>1</h3>
 
             <p>Aam Aadmi Party</p>
           </div>
@@ -135,7 +135,7 @@ desired effect
         <!-- small box -->
         <div class="small-box bg-green">
           <div class="inner">
-            <h3>150</h3>
+            <h3>2</h3>
 
             <p>Others</p>
           </div>
@@ -305,7 +305,7 @@ desired effect
 
 $(document).ready(function(){
   $.ajax({
-          url: 'http://192.168.0.5:5000/chain',
+          url: 'http://54.208.175.231:5000/chain',
           type: 'get',
           cache:true,
           beforeSend: function()
@@ -318,7 +318,7 @@ $(document).ready(function(){
               for(i=0;i<data.chain.length;i++){
                 for(j=0;j<data.chain[i].transactions.length-1;j++){
                   console.log(data.chain[i].transactions[j])
-                  $('#newTransactionTable').append('<tr><td>'+parseInt(i)+'.</td><td>'+ (data.chain[i].transactions[j].recipient) +'</td><td>12:00:21</td></tr>')
+                  $('#newTransactionTable').append('<tr><td>'+parseInt(i)+'.</td><td>'+ (data.chain[i].transactions[j].recipient).substring(0,10) +'..</td><td>'+(data.chain[i].transactions[j].data)+'</td></tr>')
 
                 }
 

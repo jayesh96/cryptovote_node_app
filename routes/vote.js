@@ -3,6 +3,7 @@ var router = express.Router();
 var app = express();
 var multer  =   require('multer');
 var path = require('path');
+var request = require('request');
 
 app.use(express.static(__dirname + '/public'));
 var storage =   multer.diskStorage({
@@ -35,22 +36,23 @@ router.get('/votenow', function(req, res, next) {
 
 
 router.post('/makeVoteTransaction',function(req, res,next){
-  var request = require('request');
+  console.log(req.body)
   myJSONObject = {
       "sender": "dsdsdddddddddddddsdsdsds2we232sdsd",
-      "recipient": "dsd322323sdsdsds",
+      "recipient": req.body['recipient'],
       "amount": "1",
-      "data": "Some Data passed"
+      "data": new Date()
   }
 
   request({
-    url: "http://192.168.0.5:5000/transactions/new",
+    url: "http://54.208.175.231:5000/transactions/new",
     method: "POST",
     json: true,   // <--Very important!!!
     body: myJSONObject
 }, function (error, response, body){
-    console.log(response);
-    res.json(true)
+   var obj = new Object()
+   obj.status = true
+    res.json(obj)
 });
 
 
