@@ -29,16 +29,15 @@ router.get('/votenow', function(req, res, next) {
 
 
 router.post('/makeVoteTransaction',function(req, res,next){
-  console.log(req.body)
+  console.log(req.headers.host)
   myJSONObject = {
       "sender": "dsdsdddddddddddddsdsdsds2we232sdsd",
       "recipient": req.body['recipient'],
       "amount": "1",
       "data": new Date()
   }
-
   request({
-    url: "http://localhost:5000/transactions/new",
+    url: "http://54.208.175.231:5000/transactions/new",
     method: "POST",
     json: true,   // <--Very important!!!
     body: myJSONObject
