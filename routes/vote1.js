@@ -20,7 +20,7 @@ router.post('/makeVoteTransaction',function(req, res,next){
   }
 
   request({
-    url: "http://localhost:5000/transactions/new",
+    url: "http://54.208.175.231:5000/transactions/new",
     method: "POST",
     json: true,   // <--Very important!!!
     body: myJSONObject
