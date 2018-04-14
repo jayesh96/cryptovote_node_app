@@ -3,7 +3,7 @@ const moment = require('moment');
 
 
 
-var FEEDBACK = {
+var VOTE = {
 
   getRegisterdParty :function(callback){
     // console.log(req.user,"-------")
@@ -29,4 +29,4 @@ var FEEDBACK = {
 
 };
 
-module.exports=FEEDBACK;
+module.exports=VOTE;

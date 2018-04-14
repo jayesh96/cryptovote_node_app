@@ -3,19 +3,19 @@ var router = express.Router();
 var app = express();
 var multer  =   require('multer');
 var path = require('path');
+const modelIndex = require('../models/index');
 
 app.use(express.static(__dirname + '/public'));
-var storage =   multer.diskStorage({
-  destination: function (req, file, callback) {
-    callback(null, './uploads');
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './uploads')
   },
-  filename: function (req, file, callback) {
-    callback(null,Date.now()+ '-' + file.fieldname + '-' + Date.now()+'.jpg');
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now())
   }
-});
-var upload = multer({ storage : storage })
-
-
+})
+var upload = multer({ storage: storage })
 
 router.get('/', function(req, res, next) {
   console.log("hello")
@@ -36,10 +36,32 @@ router.get('/signup', function(req, res, next) {
 });
 
 
-router.post('/signup', function(req, res, next) {
-  // res.render('index', { title: 'Express' });
-  console.log(req.body)
-  res.render('signup', { title: 'Event Details' });
+router.post('/signup',upload.single('userDoc'), function(req, res, next) {
+  modelIndex.registerNewUser(req.file.path, req.body,function(err, result){
+
+        if(err)
+        {
+
+       var obj= new Object();
+       obj.status=false;
+       obj.message=err.sqlMessage;
+
+       res.json(obj);
+     }
+     else
+     {
+       var myJSON = JSON.stringify(result);
+       console.log("output "+myJSON);
+
+       var obj= new Object();
+       obj.status=true;
+       obj.result = result
+       obj.message='OK!';
+       res.render('login', { title: 'Event Details' });
+
+     }
+  });
+
 })
 
 

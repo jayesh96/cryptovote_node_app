@@ -13,20 +13,44 @@ var multer  =   require('multer');
 var passport = require('passport')
   , LocalStrategy = require('passport-local').Strategy;
 
+const modelIndex = require('./models/index');
 
-	passport.serializeUser(function(user, done) {
-	  done(null, user);
-	});
 
-	passport.deserializeUser(function(user, done) {
-	  done(null, user);
-	});
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
 
+passport.deserializeUser(function(user, done) {
+  console.log(user,"----!!!!!!-----USER")
+
+  done(null, user);
+});
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
-		console.log(username,password,"---->")
-    return done(null, true);
+    modelIndex.loginUser(username,password ,function(err, result){
+
+          if(err)
+          {
+
+         var obj= new Object();
+         obj.status=false;
+         obj.message=err.sqlMessage;
+
+         return done(null, obj);
+       }
+       else if(result.details==0){
+         return done(null, false);
+       }else
+       {
+
+         var obj= new Object();
+         obj.status=true;
+         obj.response=result.details;
+         return done(null, obj);
+
+       }
+    });
   }
 ));
 
@@ -66,14 +90,23 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', index);
-app.use('/vote', vote);
+app.get('/uploads/*',ensureAuthenticated, function (req, res) {
+
+    res.sendFile(path.resolve('.'+req.originalUrl));
+});
+
+app.use('/vote', ensureAuthenticated,vote);
 
 app.post('/loginn',
   passport.authenticate('local', { successRedirect: '/vote/home',
-                                   failureRedirect: '/22n',
+                                   failureRedirect: '/login',
                                     })
 );
 
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
 
 
 function ensureAuthenticated(req, res, next) {

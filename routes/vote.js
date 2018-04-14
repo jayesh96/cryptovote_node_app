@@ -6,15 +6,7 @@ var path = require('path');
 var request = require('request');
 
 app.use(express.static(__dirname + '/public'));
-var storage =   multer.diskStorage({
-  destination: function (req, file, callback) {
-    callback(null, './uploads');
-  },
-  filename: function (req, file, callback) {
-    callback(null,Date.now()+ '-' + file.fieldname + '-' + Date.now()+'.jpg');
-  }
-});
-var upload = multer({ storage : storage })
+var upload = multer({ dest: 'uploads/' })
 
 const modelVote = require('../models/vote.js');
 
@@ -26,8 +18,9 @@ router.get('/upload', function(req, res, next) {
 
 
 router.get('/home', function(req, res, next) {
-  // res.render('index', { title: 'Express' });
+  console.log(req.user,"-------~~~~~~~~------~~~~~~~~------~~~~~~~~",req.isAuthenticated())
   res.render('home', { title: 'Event Details' });
+
 });
 router.get('/votenow', function(req, res, next) {
   // res.render('index', { title: 'Express' });
@@ -45,7 +38,7 @@ router.post('/makeVoteTransaction',function(req, res,next){
   }
 
   request({
-    url: "http://54.208.175.231:5000/transactions/new",
+    url: "http://localhost:5000/transactions/new",
     method: "POST",
     json: true,   // <--Very important!!!
     body: myJSONObject
