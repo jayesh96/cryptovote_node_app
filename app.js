@@ -9,6 +9,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session  = require('express-session');
 var multer  =   require('multer');
+var request = require('request');
 
 var passport = require('passport')
   , LocalStrategy = require('passport-local').Strategy;
@@ -66,6 +67,7 @@ var path = require('path');
 
 var index = require('./routes/index');
 var vote = require('./routes/vote');
+var vote1 = require('./routes/vote1');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -116,7 +118,10 @@ app.get('/uploads/*',ensureAuthenticated, function (req, res) {
     res.sendFile(path.resolve('.'+req.originalUrl));
 });
 
-app.use('/vote', ensureAuthenticated,vote);
+
+app.use('/votenew',vote1);
+
+app.use('/vote',vote);
 
 app.post('/loginn',
   passport.authenticate('local', { successRedirect: '/vote/home',

@@ -18,7 +18,7 @@ router.get('/upload', function(req, res, next) {
 
 
 router.get('/home', function(req, res, next) {
-  console.log(req.user,"-------~~~~~~~~------~~~~~~~~------~~~~~~~~",req.isAuthenticated())
+  console.log(req.user)
   res.render('home', { title: 'Event Details' });
 
 });
@@ -28,27 +28,7 @@ router.get('/votenow', function(req, res, next) {
 });
 
 
-router.post('/makeVoteTransaction',function(req, res,next){
-  console.log(req.headers.host)
-  myJSONObject = {
-      "sender": "dsdsdddddddddddddsdsdsds2we232sdsd",
-      "recipient": req.body['recipient'],
-      "amount": "1",
-      "data": new Date()
-  }
-  request({
-    url: "http://54.208.175.231:5000/transactions/new",
-    method: "POST",
-    json: true,   // <--Very important!!!
-    body: myJSONObject
-}, function (error, response, body){
-   var obj = new Object()
-   obj.status = true
-    res.json(obj)
-});
 
-
-})
 
 router.get('/ballot', function(req, res, next) {
   modelVote.getRegisterdParty(function(err, result){

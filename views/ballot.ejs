@@ -247,7 +247,7 @@ function add_transaction(party_id){
 
     $.ajax({
             type: 'POST',
-            url: 'http://54.208.175.231:3000/vote/makeVoteTransaction',
+            url: 'http://localhost:3000/votenew/makeVoteTransaction',
             data: {
                 "recipient": party_id,
               },
