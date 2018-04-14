@@ -305,10 +305,8 @@ desired effect
 <script>
 
 $(document).ready(function(){
-  var host = "http://"+window.location.hostname+":5000/chain";
-  alert(host)
   $.ajax({
-          url: host,
+          url: 'http://54.208.175.231:5000/chain',
           type: 'get',
           cache:true,
           beforeSend: function()

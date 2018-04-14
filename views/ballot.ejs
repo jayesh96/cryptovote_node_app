@@ -245,11 +245,9 @@ desired effect
 
 function add_transaction(party_id){
 
-    var host = "http://"+window.location.hostname+":3000/vote/makeVoteTransaction";
-    alert(host)
     $.ajax({
             type: 'POST',
-            url: host,
+            url: 'http://54.208.175.231:3000/vote/makeVoteTransaction',
             data: {
                 "recipient": party_id,
               },
