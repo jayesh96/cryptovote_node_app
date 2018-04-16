@@ -305,6 +305,7 @@ desired effect
 <script>
 
 $(document).ready(function(){
+
   $.ajax({
           url: 'http://54.208.175.231:5000/chain',
           type: 'get',
@@ -319,7 +320,7 @@ $(document).ready(function(){
               for(i=0;i<data.chain.length;i++){
                 for(j=0;j<data.chain[i].transactions.length-1;j++){
                   console.log(data.chain[i].transactions[j])
-                  $('#newTransactionTable').append('<tr><td>'+parseInt(i)+'.</td><td>'+ (data.chain[i].transactions[j].recipient).substring(0,10) +'..</td><td>'+(data.chain[i].transactions[j].data)+'</td></tr>')
+                  $('#newTransactionTable').append('<tr><td>'+parseInt(i)+'.</td><td>'+ (data.chain[i].transactions[j].data['party_short_name']) +'</td><td>'+(data.chain[i].transactions[j].data['datetime'])+'</td></tr>')
 
                 }
 

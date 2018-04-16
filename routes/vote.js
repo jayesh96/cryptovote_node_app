@@ -30,6 +30,7 @@ router.get('/votenow', function(req, res, next) {
 
 
 router.get('/ballot', function(req, res, next) {
+
   modelVote.getRegisterdParty(function(err, result){
 
         if(err)
@@ -49,7 +50,8 @@ router.get('/ballot', function(req, res, next) {
        obj.status=true;
        obj.result=result;
        console.log(obj.result.data)
-       res.render('ballot', { obj:obj });
+       console.log(req.user,"USEEEEERRRRRR!")
+       res.render('ballot', { obj:obj,user:req.user });
 
      }
   });

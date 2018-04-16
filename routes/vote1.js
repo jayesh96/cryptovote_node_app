@@ -12,11 +12,19 @@ const modelVote = require('../models/vote.js');
 
 router.post('/makeVoteTransaction',function(req, res,next){
   console.log(req.body)
+
+  data_params = {
+    "datetime": req.body['datetime'],
+    "party_name":req.body['party_name'],
+      "party_short_name":req.body['party_short_name'],
+    "user_city":req.body['user_city'],
+    "user_state":req.body['user_state']
+  }
   myJSONObject = {
-      "sender": "dsdsdddddddddddddsdsdsds2we232sdsd",
+      "sender": req.body['user_hash_value'],
       "recipient": req.body['recipient'],
       "amount": "1",
-      "data": new Date()
+      "data": data_params
   }
 
   request({

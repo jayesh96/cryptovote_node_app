@@ -105,9 +105,10 @@ desired effect
               <div class="progress">
                 <div class="progress-bar" style="background:#000!important ;width: 100%"></div>
               </div>
+
               <span class="progress-description">
                 <input styyl type='hidden' id='party_<%= obj.result.data[i].id %>' value='<%= obj.result.data[i].hash_address %>'>
-                    <input class='vote_button' type="button" id='party_<%= obj.result.data[i].id %>' style="background:red" onclick="add_transaction('<%= obj.result.data[i].hash_address %>')"  value="VOTE"></input>
+                    <input class='vote_button' type="button" id='party_<%= obj.result.data[i].id %>' style="background:red" onclick="add_transaction('<%= obj.result.data[i].hash_address %>','<%= user.response[0].user_hash %>','<%= obj.result.data[i].registered_name %>','<%= obj.result.data[i].short_name %>','<%= user.response[0].city %>','<%= user.response[0].state %>')"  value="VOTE"></input>
                   </span>
             </div>
             <!-- /.info-box-content -->
@@ -153,77 +154,7 @@ desired effect
   </footer>
 
   <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Create the tabs -->
-    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-      <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
-    </ul>
-    <!-- Tab panes -->
-    <div class="tab-content">
-      <!-- Home tab content -->
-      <div class="tab-pane active" id="control-sidebar-home-tab">
-        <h3 class="control-sidebar-heading">Recent Activity</h3>
-        <ul class="control-sidebar-menu">
-          <li>
-            <a href="javascript:;">
-              <i class="menu-icon fa fa-birthday-cake bg-red"></i>
 
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
-
-                <p>Will be 23 on April 24th</p>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <!-- /.control-sidebar-menu -->
-
-        <h3 class="control-sidebar-heading">Tasks Progress</h3>
-        <ul class="control-sidebar-menu">
-          <li>
-            <a href="javascript:;">
-              <h4 class="control-sidebar-subheading">
-                Custom Template Design
-                <span class="pull-right-container">
-                    <span class="label label-danger pull-right">70%</span>
-                  </span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <!-- /.control-sidebar-menu -->
-
-      </div>
-      <!-- /.tab-pane -->
-      <!-- Stats tab content -->
-      <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
-      <!-- /.tab-pane -->
-      <!-- Settings tab content -->
-      <div class="tab-pane" id="control-sidebar-settings-tab">
-        <form method="post">
-          <h3 class="control-sidebar-heading">General Settings</h3>
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Report panel usage
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Some information about this general settings option
-            </p>
-          </div>
-          <!-- /.form-group -->
-        </form>
-      </div>
-      <!-- /.tab-pane -->
-    </div>
-  </aside>
   <!-- /.control-sidebar -->
   <!-- Add the sidebar's background. This div must be placed
   immediately after the control sidebar -->
@@ -243,13 +174,19 @@ desired effect
 
 <script type="text/javascript">
 
-function add_transaction(party_id){
-
+function add_transaction(party_id,hash_value,party_name,party_short_name,user_city,user_state){
     $.ajax({
             type: 'POST',
             url: 'http://54.208.175.231:3000/votenew/makeVoteTransaction',
             data: {
                 "recipient": party_id,
+                "datetime":new Date(),
+                "user_hash_value":hash_value,
+                'party_name':party_name,
+                'party_short_name':party_short_name,
+                'user_city':user_city,
+                'user_state':user_state
+
               },
             beforeSend:function(data){
               $("input[type=button]").attr("disabled", "disabled");
