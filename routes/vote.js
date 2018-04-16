@@ -24,9 +24,8 @@ router.get('/home', function(req, res, next) {
 });
 router.get('/votenow', function(req, res, next) {
   // res.render('index', { title: 'Express' });
-  res.render('votenow', { title: 'Event Details' });
+  res.render('votenow', { user:req.user });
 });
-
 
 
 

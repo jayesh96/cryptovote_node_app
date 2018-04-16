@@ -121,7 +121,7 @@ app.get('/uploads/*',ensureAuthenticated, function (req, res) {
 
 app.use('/votenew',vote1);
 
-app.use('/vote',vote);
+app.use('/vote',ensureAuthenticated,vote);
 
 app.post('/loginn',
   passport.authenticate('local', { successRedirect: '/vote/home',

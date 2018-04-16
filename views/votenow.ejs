@@ -160,7 +160,7 @@ desired effect
           <div class="box box-widget widget-user">
             <!-- Add the bg color to the header using any of the bg-* classes -->
             <div class="widget-user-header bg-aqua-active">
-              <h3 class="widget-user-username"><b>User</b> Name</h3>
+              <h3 class="widget-user-username"><b><%= user.response[0].full_name %></b></h3>
             </div>
             <div class="widget-user-image">
               <img class="img-circle" src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-512.png" alt="User Avatar">
@@ -169,7 +169,7 @@ desired effect
               <div class="row">
                 <div class="col-sm-4 border-right">
                   <div class="description-block">
-                    <h5 class="description-header">ndjfnfjdnfj23728dsndsnd</h5>
+                    <h5 class="description-header"><%= user.response[0].user_hash %></h5>
                     <span class="description-text">Hash Address</span>
                   </div>
                   <!-- /.description-block -->
@@ -177,8 +177,8 @@ desired effect
                 <!-- /.col -->
                 <div class="col-sm-4 border-right">
                   <div class="description-block">
-                    <h5 class="description-header">2088 5433 3421</h5>
-                    <span class="description-text">Aadhar No</span>
+                    <h5 class="description-header"><%= user.response[0].mobile_no %></h5>
+                    <span class="description-text">Contact No</span>
                   </div>
                   <!-- /.description-block -->
                 </div>
@@ -210,7 +210,13 @@ desired effect
       </div>
       <div class="row">
 
-    <a href="/vote/ballot"><button type="button" class="btn btn-block btn-danger btn-lg">Click Here To Vote Now</button></a>
+        <% if(user.response[0].is_verified==0){ %>
+          <button type="button" class="btn btn-block btn-danger btn-lg">Please Wait For your Verification</button>
+
+   <% } else{ %>
+     <a href="/vote/ballot"><button type="button" class="btn btn-block btn-danger btn-lg">Click Here to Vote</button></a>
+
+  <% } %>
 
   </div>
 
