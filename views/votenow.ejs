@@ -78,7 +78,7 @@ desired effect
     <!-- Content Header (Page header) -->
 
     <section class="content-header">
-      <button type="button" class="btn bg-maroon margin">April 2, 2018</button>
+      <button type="button" id='todayDate' class="btn bg-maroon margin">April 2, 2018</button>
       <button type="button" class="btn bg-maroon margin">General Elections</button>
       <div class="callout callout-success">
                 <h4>Your Own Decentralized Voting App</h4>
@@ -91,62 +91,10 @@ desired effect
     <section class="content container-fluid">
 
       <div class="row">
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-green">
-            <div class="inner">
-              <h3>150</h3>
-
-              <p>Bhartiya Janta Party</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-bag"></i>
-            </div>
-          </div>
-        </div>
-
-      <div class="col-lg-3 col-xs-6">
-        <!-- small box -->
-        <div class="small-box bg-green">
-          <div class="inner">
-            <h3>150</h3>
-
-            <p>Indian National Congress</p>
-          </div>
-          <div class="icon">
-            <i class="ion ion-bag"></i>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-xs-6">
-        <!-- small box -->
-        <div class="small-box bg-green">
-          <div class="inner">
-            <h3>150</h3>
-
-            <p>Aam Aadmi Party</p>
-          </div>
-          <div class="icon">
-            <i class="ion ion-bag"></i>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-xs-6">
-        <!-- small box -->
-        <div class="small-box bg-green">
-          <div class="inner">
-            <h3>150</h3>
-
-            <p>Others</p>
-          </div>
-          <div class="icon">
-            <i class="ion ion-bag"></i>
-          </div>
-        </div>
-      </div>
-        <!-- ./col -->
+        <div id='party_list'>
 
 
+          </div>
 
 
     </section>
@@ -335,7 +283,31 @@ desired effect
 <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../dist/js/adminlte.min.js"></script>
+<script>
 
+$(document).ready(function(){
+
+
+      $.ajax({
+              url: 'http://54.208.175.231:3000/party/getpartylist',
+              type: 'get',
+              cache:true,
+
+              success: function(data){
+                var response = data.result.data
+                for(i=0;i<response.length;i++){
+                  console.log(response)
+                  $('#party_list').append('<div class="col-lg-3 col-xs-6"><div class="small-box bg-green"><div class="inner"><h3>1</h3><p>'+response[i].short_name+'<p>'+response[i].registered_name+'</p></div><div class="icon"><i class="ion ion-bag"></i></div></div></div>');
+                }
+                  return true;
+              },
+
+          });
+
+      return false;
+});
+
+</script>
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->

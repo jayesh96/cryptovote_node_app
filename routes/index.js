@@ -3,6 +3,7 @@ var router = express.Router();
 var app = express();
 var multer  =   require('multer');
 var path = require('path');
+
 const modelIndex = require('../models/index');
 
 app.use(express.static(__dirname + '/public'));
@@ -18,8 +19,7 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage })
 
 router.get('/', function(req, res, next) {
-  console.log("hello")
-  res.render('splash', { title: 'Event Details' });
+  res.render('splash', {});
 });
 
 

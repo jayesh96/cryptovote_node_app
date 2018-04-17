@@ -43,6 +43,34 @@ router.post('/makeVoteTransaction',function(req, res,next){
 })
 
 
+router.get('/getpartylist', function(req, res, next) {
+
+  modelVote.getRegisterdParty(function(err, result){
+
+        if(err)
+        {
+
+       var obj= new Object();
+       obj.status=false;
+       obj.result=err.sqlMessage;
+
+       res.json(obj);
+     }
+     else
+     {
+
+
+       var obj= new Object();
+       obj.status=true;
+       obj.result=result;
+       console.log(obj.result.data)
+       console.log(req.user,"USEEEEERRRRRR!")
+       res.json(obj)
+
+     }
+  });
+});
+
 
 
 

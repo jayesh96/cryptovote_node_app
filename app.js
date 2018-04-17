@@ -68,6 +68,7 @@ var path = require('path');
 var index = require('./routes/index');
 var vote = require('./routes/vote');
 var vote1 = require('./routes/vote1');
+var party = require('./routes/party');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -120,6 +121,7 @@ app.get('/uploads/*',ensureAuthenticated, function (req, res) {
 
 
 app.use('/votenew',vote1);
+app.use('/party',vote1);
 
 app.use('/vote',ensureAuthenticated,vote);
 

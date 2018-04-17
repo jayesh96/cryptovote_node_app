@@ -79,7 +79,7 @@ desired effect
     <!-- Content Header (Page header) -->
 
     <section class="content-header">
-      <button type="button" class="btn bg-maroon margin">April 2, 2018</button>
+      <button type="button" class="btn bg-maroon margin"><%= current_time %></button>
       <button type="button" class="btn bg-maroon margin">General Elections</button>
       <div class="callout callout-success">
                 <h4>Your Own Decentralized Voting App</h4>
@@ -91,60 +91,12 @@ desired effect
     <!-- Main content -->
     <section class="content container-fluid">
 
-      <div class="row">
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-green">
-            <div class="inner">
-              <h3>1</h3>
+      <div class="row" >
 
-              <p>Bhartiya Janta Party</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-bag"></i>
-            </div>
-          </div>
+      <div id='party_list'>
+
+
         </div>
-
-      <div class="col-lg-3 col-xs-6">
-        <!-- small box -->
-        <div class="small-box bg-green">
-          <div class="inner">
-            <h3>2</h3>
-
-            <p>Indian National Congress</p>
-          </div>
-          <div class="icon">
-            <i class="ion ion-bag"></i>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-xs-6">
-        <!-- small box -->
-        <div class="small-box bg-green">
-          <div class="inner">
-            <h3>1</h3>
-
-            <p>Aam Aadmi Party</p>
-          </div>
-          <div class="icon">
-            <i class="ion ion-bag"></i>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-xs-6">
-        <!-- small box -->
-        <div class="small-box bg-green">
-          <div class="inner">
-            <h3>2</h3>
-
-            <p>Others</p>
-          </div>
-          <div class="icon">
-            <i class="ion ion-bag"></i>
-          </div>
-        </div>
-      </div>
         <!-- ./col -->
 
 
@@ -168,8 +120,8 @@ desired effect
               <table id="newTransactionTable" class="table table-condensed">
                 <tbody><tr>
                   <th>Block</th>
-                  <th style="text-align:center !important" >Address</th>
-                  <th>Timestamp</th>
+                  <th  >Party</th>
+                  <th style="text-align:center !important">Timestamp</th>
                 </tr>
                 <div id='refresh-button' style="display:None">
                 <i  class="fa fa-refresh fa-spin"></i>Please Wait While Blocks Loads!
@@ -306,6 +258,8 @@ desired effect
 
 $(document).ready(function(){
 
+  parties_list = []
+
   $.ajax({
           url: 'http://54.208.175.231:5000/chain',
           type: 'get',
@@ -316,19 +270,61 @@ $(document).ready(function(){
           },
           success: function(data){
               document.getElementById('refresh-button').style.display = 'None';
-              console.log(data)
               for(i=0;i<data.chain.length;i++){
                 for(j=0;j<data.chain[i].transactions.length-1;j++){
-                  console.log(data.chain[i].transactions[j])
                   $('#newTransactionTable').append('<tr><td>'+parseInt(i)+'.</td><td>'+ (data.chain[i].transactions[j].data['party_short_name']) +'</td><td>'+(data.chain[i].transactions[j].data['datetime'])+'</td></tr>')
+
+
+
 
                 }
 
               }
+              return true;
           },
 
       });
-      return false
+
+      $.ajax({
+              url: 'http://54.208.175.231:3000/party/getpartylist',
+              type: 'get',
+              cache:true,
+
+              success: function(party_list_data){
+                var response = party_list_data.result.data
+                for(i=0;i<response.length;i++){
+                  $('#party_list').append('<div class="col-lg-3 col-xs-6"><div class="small-box bg-green"><div class="inner"><h3 id='+response[i].short_name+'>0</h3><p>'+response[i].short_name+'<p>'+response[i].registered_name+'</p></div><div class="icon"><i class="ion ion-bag"></i></div></div></div>');
+                  parties_list.push(response[i].short_name)
+                  console.log(parties_list)
+            }
+                return true;
+          },
+      });
+
+
+          $.ajax({
+                  url: 'http://54.208.175.231:5000/chain',
+                  type: 'get',
+                  cache:true,
+
+                  success: function(data1){
+                    console.log(parties_list)
+
+                    for(i=1;i<data1.chain.length;i++){
+                      for(j=0;j<data1.chain[i].transactions.length-1;j++){
+
+                        var party_name = data1.chain[i].transactions[j].data['party_short_name']
+                        party_count = parseInt(document.getElementById(party_name).innerHTML)+1
+                        console.log(party_count)
+                        document.getElementById(party_name).innerHTML = party_count
+                        console.log("----")
+
+                      }
+                    }
+                  },
+        });
+
+      return false;
 });
 
 </script>
