@@ -41,13 +41,14 @@ var INDEX = {
     var current_date = new Date();
     var current_date_string = Math.floor(Date.now() / 1000);
     user_hash_value_input = data.full_name+data.email_+data.phone_np+current_date_string
+
     Promise.all([makehash(user_hash_key,user_hash_value_input)]).then((response)=>{
 
       console.log(data,"=======", uploaded_document_path,"---->",response,"!!!!!!",user_hash_value_input)
       var password_ = data.password_
       var encryptedpassword_ = encrypt(key, password_);
       console.log("encrypted password:"+encryptedpassword_)
-      dbConnection.query("INSERT INTO user_profile (full_name,email,password,mobile_no,document_uploaded_path,reg_date,user_hash) VALUES (?,?,?,?,?,NOW(),?)",[data.full_name,data.email_,encryptedpassword_,data.phone_np,uploaded_document_path,response[0]] ,function( err, result){
+      dbConnection.query("INSERT INTO user_profile (full_name,email,password,mobile_no,document_uploaded_path,reg_date,user_hash,gender,document_type) VALUES (?,?,?,?,?,NOW(),?,?,?)",[data.full_name,data.email_,encryptedpassword_,data.phone_np,uploaded_document_path,response[0],data.gender,data.document_type] ,function( err, result){
         console.log(this.sql)
         if(err){
           console.log("Error in saving User Details, Try Again!");

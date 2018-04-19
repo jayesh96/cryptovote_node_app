@@ -51,8 +51,17 @@
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" name="phone_np" value=""  placeholder="Mobile No.">
+        <input type="number" class="form-control" name="phone_np" value=""  placeholder="Mobile No.">
         <span class="glyphicon glyphicon-phone form-control-feedback"></span>
+      </div>
+
+      <div class="form-group">
+        <select name="gender" class="form-control" id="sel2">
+          <option>Male</option>
+          <option>Female</option>
+          <option>Others</option>
+        </select>
+
       </div>
 
       <p><b>Upload Your Government Identification Here</b></p>
@@ -60,7 +69,7 @@
 
 
       <div class="form-group">
-        <select class="form-control" id="sel1">
+        <select name="document_type" class="form-control" id="sel1">
           <option>Aadhar Card</option>
           <option>Passport</option>
           <option>Voter Id Card</option>
@@ -70,28 +79,24 @@
       </div>
 
       <div class="form-group has-feedback">
-        <input type="file" name="userDoc" class="form-control" placeholder="Upload">
+        <input type="file" name="userDoc" class="form-control" placeholder="Upload" required>
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
 
 
       <div class="row">
-        <div class="col-xs-4">
-
+        <div class="col-xs-6">
+            <a href="#" style="background-color:#00a7d0; color:white" class="btn btn-block btn-social btn-flat">Login</a>
         </div>
         <!-- /.col -->
-        <div class="col-xs-8">
+        <div class="col-xs-6">
           <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
         </div>
         <!-- /.col -->
       </div>
     </form>
 
-    <div class="social-auth-links text-center">
-      <p>- OR -</p>
 
-      <a href="#" style="background-color:#00a7d0; color:white" class="btn btn-block btn-social btn-flat">Sign In</a>
-    </div>
     <!-- /.social-auth-links -->
 
     <!-- <a href="#">I forgot my password</a><br>
