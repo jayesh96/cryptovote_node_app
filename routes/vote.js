@@ -62,7 +62,10 @@ router.get('/ballot', function(req, res, next) {
 
 
 
-
+router.get('/profile', function(req, res, next) {
+  // res.render('index', { title: 'Express' });
+  res.render('profile', { user:req.user });
+});
 
 
 

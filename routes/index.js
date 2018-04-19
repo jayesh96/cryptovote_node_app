@@ -37,6 +37,8 @@ router.get('/signup', function(req, res, next) {
 });
 
 
+
+
 router.post('/signup',upload.single('userDoc'), function(req, res, next) {
   console.log(req.body)
   modelIndex.registerNewUser(req.file.path, req.body,function(err, result){

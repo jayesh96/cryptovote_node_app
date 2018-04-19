@@ -75,29 +75,7 @@ desired effect
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
 
-    <section class="content-header">
-      <button type="button" class="btn bg-maroon margin"><%= current_time %></button>
-      <button type="button" class="btn bg-maroon margin">General Elections</button>
-      <div class="callout callout-success">
-                <h4>Your Own Decentralized Voting App</h4>
-
-                <p>Cast Your Vote Now</p>
-      </div>
-    </section>
-
-    <!-- Main content -->
-    <section class="content container-fluid">
-
-      <div class="row">
-        <div id='party_list'>
-
-
-          </div>
-
-
-    </section>
 
     <section class="content container-fluid">
 
@@ -115,6 +93,21 @@ desired effect
             </div>
             <div class="box-footer">
               <div class="row">
+
+                <div class="col-sm-4">
+                  <div class="description-block">
+                    <% if(user.response[0].is_verified === 1){ %>
+                     <h5 class="description-header" style="color:green">Verified</h5>
+                   <% } else{ %>
+                     <h5 class="description-header" style="color:red">Not Verified</h5>
+                  <% } %>
+
+
+                    <span class="description-text">Verification Status</span>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+
                 <div class="col-sm-4 border-right">
                   <div class="description-block">
                     <h5 class="description-header"><%= user.response[0].user_hash %></h5>
@@ -122,6 +115,15 @@ desired effect
                   </div>
                   <!-- /.description-block -->
                 </div>
+
+                <div class="col-sm-4 border-right">
+                  <div class="description-block">
+                    <h5 class="description-header"><%= user.response[0].email %></h5>
+                    <span class="description-text">Email Address</span>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+
                 <!-- /.col -->
                 <div class="col-sm-4 border-right">
                   <div class="description-block">
@@ -139,6 +141,21 @@ desired effect
                   <!-- /.description-block -->
                 </div>
 
+                <div class="col-sm-4">
+                  <div class="description-block">
+                    <h5 class="description-header"><%= user.response[0].reg_date %></h5>
+                    <span class="description-text">Registeration Date</span>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+
+                <div class="col-sm-4 border-right">
+                  <div class="description-block">
+                    <h5 class="description-header"><a href="http://54.208.175.231:3000/<%= user.response[0].document_uploaded_path %>"><%= user.response[0].document_type %></a></h5>
+                    <span class="description-text">Uploaded Document</span>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
 
 
                 <!-- /.col -->
@@ -152,13 +169,7 @@ desired effect
       </div>
       <div class="row">
 
-        <% if(user.response[0].is_verified==0){ %>
-          <button type="button" class="btn btn-block btn-danger btn-lg">Please Wait For your Verification</button>
-
-   <% } else{ %>
-     <a href="/vote/ballot"><button type="button" class="btn btn-block btn-danger btn-lg">Click Here to Vote</button></a>
-
-  <% } %>
+        <button type="button" class="btn btn-block btn-success btn-lg" onclick="window.location.href='http://54.208.175.231:3000/vote/votenow'">Back</button>
 
   </div>
 

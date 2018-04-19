@@ -78,11 +78,10 @@ desired effect
     <!-- Content Header (Page header) -->
 
     <section class="content-header">
-      <button type="button" class="btn bg-maroon margin">April 2, 2018</button>
-      <button type="button" class="btn bg-maroon margin">General Elections</button>
+      <input type="hidden" class="btn bg-maroon margin" style='col'><%= user.response[0].user_hash %></input>
       <div class="callout callout-success">
-                <h4>Your Own Decentralized Voting App</h4>
-
+                <h4>Your Voter Hash </h4>
+                <h5 style="color:white" id='user_id_hash'><%= user.response[0].user_hash %></h5>
                 <p>Cast Your Vote Now</p>
       </div>
     </section>
@@ -108,7 +107,7 @@ desired effect
 
               <span class="progress-description">
                 <input styyl type='hidden' id='party_<%= obj.result.data[i].id %>' value='<%= obj.result.data[i].hash_address %>'>
-                    <input class='vote_button' type="button" id='party_<%= obj.result.data[i].id %>' style="background:red" onclick="add_transaction('<%= obj.result.data[i].hash_address %>','<%= user.response[0].user_hash %>','<%= obj.result.data[i].registered_name %>','<%= obj.result.data[i].short_name %>','<%= user.response[0].city %>','<%= user.response[0].state %>')"  value="VOTE"></input>
+                    <input class='vote_button' type="button" id='party_<%= obj.result.data[i].id %>' style="background:red" onclick="add_transaction('<%= obj.result.data[i].hash_address %>','<%= user.response[0].user_hash %>','<%= obj.result.data[i].registered_name %>','<%= obj.result.data[i].short_name %>','<%= user.response[0].city %>','<%= user.response[0].state %>','<%= user.response[0].gender %>')"  value="VOTE"></input>
                   </span>
             </div>
             <!-- /.info-box-content -->
@@ -133,10 +132,10 @@ desired effect
       <a href="/vote/votenow"><button style="background-color:#367fa9; border-color:#000; color:white" type="button" class="btn btn-block btn-default"><i class="fa fa-hand-pointer-o" aria-hidden="true"></i></button></a>
     </div>
     <div style='padding-right:0px !important;padding-left:0px' class="col-lg-3 col-xs-3">
-      <a href="/vote/home"><button style="background-color:#367fa9; border-color:#000; color:white" type="button" class="btn btn-block btn-default"><i class="fa fa-user-circle" aria-hidden="true"></i></button></a>
+      <a href="/vote/profile"><button style="background-color:#367fa9; border-color:#000; color:white" type="button" class="btn btn-block btn-default"><i class="fa fa-user-circle" aria-hidden="true"></i></button></a>
     </div>
     <div style='padding-right:0px !important;padding-left:0px' class="col-lg-3 col-xs-3">
-      <a href="/vote/home"><button style="background-color:#367fa9; border-color:#000; color:white" type="button" class="btn btn-block btn-default"><i class="fa fa-info" aria-hidden="true"></i></button></a>
+      <a href="/logout"><button style="background-color:#367fa9; border-color:#000; color:white" type="button" class="btn btn-block btn-default"><i class="fas fa-sign-out" aria-hidden="true"></i></button></a>
     </div>
 
 
@@ -172,9 +171,44 @@ desired effect
 <script src="../../dist/js/adminlte.min.js"></script>
 
 
+
+<script>
+$(document).ready(function(){
+
+  var current_user_hash = document.getElementById("user_id_hash").innerHTML
+          $.ajax({
+
+                  url: 'http://54.208.175.231:5000/chain',
+                  type: 'get',
+                  cache:true,
+
+                  success: function(data1){
+                    for(i=0;i<data1.chain.length;i++){
+                      for(j=0;j<data1.chain[i].transactions.length-1;j++){
+                        console.log(current_user_hash)
+                        console.log(data1.chain[i].transactions[j]['sender'])
+
+                        if(current_user_hash == data1.chain[i].transactions[j]['sender']){
+                          alert("Sorry You cant vote now, Already Voted, Thanks!")
+                        }else{
+                            console.log("No")
+                        }
+                        console.log("----->")
+                      }
+
+                    }
+                  },
+        });
+
+      return false;
+    });
+
+  </script>
+
+
 <script type="text/javascript">
 
-function add_transaction(party_id,hash_value,party_name,party_short_name,user_city,user_state){
+function add_transaction(party_id,hash_value,party_name,party_short_name,user_city,user_state,user_gender){
     $.ajax({
             type: 'POST',
             url: 'http://54.208.175.231:3000/votenew/makeVoteTransaction',
@@ -185,7 +219,8 @@ function add_transaction(party_id,hash_value,party_name,party_short_name,user_ci
                 'party_name':party_name,
                 'party_short_name':party_short_name,
                 'user_city':user_city,
-                'user_state':user_state
+                'user_state':user_state,
+                'user_gender':user_gender
 
               },
             beforeSend:function(data){

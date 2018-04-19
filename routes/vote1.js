@@ -18,7 +18,8 @@ router.post('/makeVoteTransaction',function(req, res,next){
     "party_name":req.body['party_name'],
       "party_short_name":req.body['party_short_name'],
     "user_city":req.body['user_city'],
-    "user_state":req.body['user_state']
+    "user_state":req.body['user_state'],
+    "user_gender":req.body['user_gender']
   }
   myJSONObject = {
       "sender": req.body['user_hash_value'],
