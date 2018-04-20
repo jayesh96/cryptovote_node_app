@@ -93,6 +93,26 @@ desired effect
 
         <section class="content">
 
+          <div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Oops!</h4>
+      </div>
+      <div class="modal-body">
+        <p>You Have Already votes, Thanks!</p>
+      </div>
+      <div class="modal-footer">
+        <a href="/vote/home"><button type="button" class="btn btn-default" >Close</button></a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
            <% for (var i = 0; i < obj.result.data.length; i++) { %>
           <div style="border-radius:20px; background-color:#367fa9 !important"class="info-box bg-yellow">
             <span style="border-radius:20px" class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
@@ -189,7 +209,8 @@ $(document).ready(function(){
                         console.log(data1.chain[i].transactions[j]['sender'])
 
                         if(current_user_hash == data1.chain[i].transactions[j]['sender']){
-                          alert("Sorry You cant vote now, Already Voted, Thanks!")
+                          $('#myModal').modal({backdrop: 'static', keyboard: false})
+
                         }else{
                             console.log("No")
                         }

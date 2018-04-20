@@ -210,28 +210,58 @@ desired effect
 <script>
 
 $(document).ready(function(){
+var parties_list =  []
+
+  $.ajax({
+          url: 'http://54.208.175.231:3000/party/getpartylist',
+          type: 'get',
+          cache:true,
+
+          success: function(party_list_data){
+            var response = party_list_data.result.data
+            for(i=0;i<response.length;i++){
+              $('#party_list').append('<div class="col-lg-3 col-xs-6"><div class="small-box bg-green"><div class="inner"><h3 id='+response[i].short_name+'>0</h3><p>'+response[i].short_name+'<p>'+response[i].registered_name+'</p></div><div class="icon"><i class="ion ion-bag"></i></div></div></div>');
+              parties_list.push(response[i].short_name)
+              console.log(parties_list)
+        }
+
+        $.ajax({
+
+                url: 'http://54.208.175.231:5000/chain',
+                type: 'get',
+                cache:true,
+
+                success: function(data1){
+                  console.log(parties_list)
+
+                  for(i=1;i<data1.chain.length;i++){
+                    for(j=0;j<data1.chain[i].transactions.length-1;j++){
+
+                      var party_name = data1.chain[i].transactions[j].data['party_short_name']
+                      party_count = parseInt(document.getElementById(party_name).innerHTML)+1
+                      console.log(party_count)
+                      document.getElementById(party_name).innerHTML = party_count
+                      console.log("----")
+
+                    }
+                  }
+                },
+      });
+      
+            return true;
+      },
+  });
 
 
-      $.ajax({
-              url: 'http://54.208.175.231:3000/party/getpartylist',
-              type: 'get',
-              cache:true,
 
-              success: function(data){
-                var response = data.result.data
-                for(i=0;i<response.length;i++){
-                  console.log(response)
-                  $('#party_list').append('<div class="col-lg-3 col-xs-6"><div class="small-box bg-green"><div class="inner"><h3>1</h3><p>'+response[i].short_name+'<p>'+response[i].registered_name+'</p></div><div class="icon"><i class="ion ion-bag"></i></div></div></div>');
-                }
-                  return true;
-              },
 
-          });
-
-      return false;
 });
 
+
 </script>
+
+
+
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->

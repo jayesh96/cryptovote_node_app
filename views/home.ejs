@@ -297,6 +297,29 @@ $(document).ready(function(){
                   parties_list.push(response[i].short_name)
                   console.log(parties_list)
             }
+
+            $.ajax({
+
+                    url: 'http://54.208.175.231:5000/chain',
+                    type: 'get',
+                    cache:true,
+
+                    success: function(data1){
+                      console.log(parties_list)
+
+                      for(i=1;i<data1.chain.length;i++){
+                        for(j=0;j<data1.chain[i].transactions.length-1;j++){
+
+                          var party_name = data1.chain[i].transactions[j].data['party_short_name']
+                          party_count = parseInt(document.getElementById(party_name).innerHTML)+1
+                          console.log(party_count)
+                          document.getElementById(party_name).innerHTML = party_count
+                          console.log("----")
+
+                        }
+                      }
+                    },
+          });
                 return true;
           },
       });
@@ -305,38 +328,6 @@ $(document).ready(function(){
     });
 
 </script>
-
-<script>
-$(document).ready(function(){
-  var timeDelay = 1000;
-        setTimeout(timeDelay);
-          $.ajax({
-
-                  url: 'http://54.208.175.231:5000/chain',
-                  type: 'get',
-                  cache:true,
-
-                  success: function(data1){
-                    console.log(parties_list)
-
-                    for(i=1;i<data1.chain.length;i++){
-                      for(j=0;j<data1.chain[i].transactions.length-1;j++){
-
-                        var party_name = data1.chain[i].transactions[j].data['party_short_name']
-                        party_count = parseInt(document.getElementById(party_name).innerHTML)+1
-                        console.log(party_count)
-                        document.getElementById(party_name).innerHTML = party_count
-                        console.log("----")
-
-                      }
-                    }
-                  },
-        });
-
-      return false;
-    });
-
-  </script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
