@@ -109,27 +109,46 @@ var INDEX = {
 
     });
 
-  }
+  },
+
+
+  getAllUsers :function(callback){
+    dbConnection.query("Select * From user_profile ",function( err, result){
+      if(err){
+        console.log("Some Error Occurred");
+        return callback(err);
+      }else{
+        var user = new Object();
+        user.status = true;
+        user.details = result;
+        return callback(null,user);
+
+      }
+
+
+    });
+
+  },
+
+  updateUserStatus:function(user_id,callback){
+    dbConnection.query("UPDATE user_profile SET is_verified =1 where id =?",[user_id],function( err, result){
+      if(err){
+        console.log("Some Error Occurred");
+        return callback(err);
+      }else{
+        var user = new Object();
+        user.status = true;
+        return callback(null,user);
+
+      }
+
+
+    });
+
+  },
+
 
 };
 
-
-// dbConnection.query("INSERT INTO feedback (issue,message,user_id) VALUES (?,?,?); ",[feedback.feedback_category,feedback.issue_description,user_id] ,function( err, result){
-//   //console.log("top 3 rows are" + JSON.stringify(result))
-//   console.log(this.sql)
-//   if(err){
-//     console.log("error in getting past events");
-//     return callback(err);
-//   }else{
-//     var feedback = new Object();
-//     feedback.status = true;
-//     feedback.message = "Saved Successfully!" ;
-//
-//     return callback(null,feedback);
-//
-//   }
-//
-//
-// });
 
 module.exports=INDEX;

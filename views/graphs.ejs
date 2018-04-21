@@ -1,0 +1,313 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Cryptovote/Add Party</title>
+    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="apple-icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <link rel="stylesheet" href="assets/css/normalize.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/themify-icons.css">
+    <link rel="stylesheet" href="assets/css/flag-icon.min.css">
+    <link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
+    <!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
+    <link rel="stylesheet" href="assets/scss/style.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+
+</head>
+<body onload="digitized(); drawchart(); dynamicpiechart();">
+        <!-- Left Panel -->
+
+    <aside id="left-panel" class="left-panel">
+        <nav class="navbar navbar-expand-sm navbar-default">
+
+            <div class="navbar-header">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" ><img src="images/logo.png" alt="Logo"></a>
+                <a class="navbar-brand hidden" href="./"><img src="images/logo2.png" alt="Logo"></a>
+            </div>
+
+            <div id="main-menu" class="main-menu collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li >
+                        <a href="index.html"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
+                    </li>
+
+
+                    <li >
+                        <a href="forms-basic.html"   > <i class="menu-icon fa fa-plus-square-o"></i>Add new Party</a>
+
+                    </li>
+
+
+                     <li >
+                        <a href="verify.html"   > <i class="ti-view-list menu-icon "></i>Verify User Details</a>
+
+                    </li>
+
+                                 <li class="active"><a href="graphs.html"><i class="menu-icon fa fa-line-chart"></i> Voting Stats</a></li>
+
+
+
+
+
+
+           <!--         <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-glass"></i>Pages</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="menu-icon fa fa-sign-in"></i><a href="page-login.html">Login</a></li>
+                            <li><i class="menu-icon fa fa-sign-in"></i><a href="page-register.html">Register</a></li>
+                            <li><i class="menu-icon fa fa-paper-plane"></i><a href="pages-forget.html">Forget Pass</a></li>
+                        </ul>
+                    </li>
+                </ul>-->
+            </div><!-- /.navbar-collapse -->
+        </nav>
+    </aside><!-- /#left-panel -->
+
+    <!-- Left Panel -->
+
+    <!-- Right Panel -->
+
+    <div id="right-panel" class="right-panel">
+
+        <!-- Header-->
+        <header id="header" class="header">
+
+   <h1>
+   <div style="margin-left:80%; postion:absolute width:10%" >
+
+   <p>  Date/Time: <span id="datetime"></span></p>
+
+   </div>
+   Live Voting Stats
+   </h1>
+
+   </header>
+
+   		<div class="col-xl-3 col-lg-6 p-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="stat-widget-one">
+                            <div class="stat-icon dib"><i class="ti-mobile text-danger border-danger"></i></div>
+                            <div class="stat-content dib">
+                                <div class="stat-text">Polling Stations</div>
+                                <div id="Polling-stations"class="stat-digit">0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<div class="col-xl-3 col-lg-6 p-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="stat-widget-one">
+                            <div class="stat-icon dib"><i class="fa-male fa text-success border-success"></i></div>
+                            <div class="stat-content dib">
+                                <div class="stat-text">Male Voters</div>
+                                <div id="Male-voters"class="stat-digit">0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<div class="col-xl-3 col-lg-6 p-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="stat-widget-one">
+                            <div class="stat-icon dib"><i class="fa fa-female  text-success border-success"></i></div>
+                            <div class="stat-content dib">
+                                <div class="stat-text">Female voters</div>
+                                <div id="Female-voters"class="stat-digit">0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<div class="col-xl-3 col-lg-6 p-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="stat-widget-one">
+                            <div class="stat-icon dib"><i class="ti-stats-up text-primary border-primary"></i></div>
+                            <div class="stat-content dib">
+                                <div class="stat-text">Voters Turnout</div>
+                                <div id="Voters-Turnout"class="stat-digit">0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<header class=" header ">
+<h3 class="mx-auto">
+Age Group wise
+</h3>
+</header>
+<div class="col-xl-3 col-lg-6 p-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="stat-widget-one">
+                            <div class="stat-icon dib"><i class="ti-tag text-primary border-primary "></i></div>
+                            <div class="stat-content dib">
+                                <div class="stat-text">18-24</div>
+                                <div id="Agp1"class="stat-digit">0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			<div class="col-xl-3 col-lg-6 p-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="stat-widget-one">
+                            <div class="stat-icon dib"><i class="ti-tag text-primary border-primary "></i></div>
+                            <div class="stat-content dib">
+                                <div class="stat-text">24-42</div>
+                                <div id="Agp2"class="stat-digit">0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			<div class="col-xl-3 col-lg-6 p-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="stat-widget-one">
+                            <div class="stat-icon dib"><i class="ti-tag text-primary border-primary "></i></div>
+                            <div class="stat-content dib">
+                                <div class="stat-text">42-60</div>
+                                <div id="Agp3"class="stat-digit">0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			<div class="col-xl-3 col-lg-6 p-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="stat-widget-one">
+                            <div class="stat-icon dib"><i class="ti-tag text-primary border-primary "></i></div>
+                            <div class="stat-content dib">
+                                <div class="stat-text">Above 60</div>
+                                <div id="Agp4"class="stat-digit">0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			 <div class="col-xl-12 col-lg-9 p-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="mb-3">Real Chart</h4>
+                                    <div class="flot-container">
+                                        <div id="loadvotes" class="cpu-load"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+			<div class="col-xl-6 col-lg-6 p-4">
+			<div class="card" >
+			<div class="card-body">
+				<h4 class="card-title">Voting Results</h4>
+				<p class="card-text">Age wise voting</p>
+				<canvas id="ageChart"></canvas>
+				</div>
+
+			</div>
+			</div>
+			<div class="col-xl-6 col-lg-6 p-4">
+  <div class="card" >
+    <div class="card-body">
+      <h4 class="card-title">Voting Results</h4>
+      <p class="card-text">Today's Voting Results</p>
+    <canvas id="pieChart"></canvas>
+    </div>
+
+  </div>
+</div>
+
+
+	<div class="col-xl-6 col-lg-6 p-4">
+  <div class="card" >
+    <div class="card-body">
+      <h4 class="card-title"> <i class="fab fa-stripe-s"></i> Comparison</h4>
+      <p class="card-text">Last few elections voter Turnout stats</p>
+
+    <canvas id="barChart"></canvas>
+    </div>
+
+  </div>
+</div>
+<div class="col-xl-6 col-lg-6 p-4">
+  <div class="card" >
+    <div class="card-body">
+      <h4 class="card-title">Comparison</h4>
+      <p class="card-text">Male & Female poll percentage since 1996</p>
+    <canvas id="lineChart"></canvas>
+    </div>
+
+  </div>
+</div>
+
+
+
+</div>
+
+</div>
+  </div>  <!-- Right Panel -->
+
+<script>
+
+
+    // OUR FUNCTION WHICH IS EXECUTED ON LOAD OF THE PAGE.
+    function digitized() {
+        var dt = new Date();    // DATE() CONSTRUCTOR FOR CURRENT SYSTEM DATE AND TIME.
+        var hrs = dt.getHours();
+        var min = dt.getMinutes();
+        var sec = dt.getSeconds();
+
+        min = Ticking(min);
+        sec = Ticking(sec);
+
+        document.getElementById('datetime').innerHTML = (("0"+dt.getDate()).slice(-2)) +"."+ (("0"+(dt.getMonth()+1)).slice(-2)) +"."+ (dt.getFullYear())+" / "+hrs + ":" + min+":"+sec;
+
+
+
+
+        // CALL THE FUNCTION EVERY 1 SECOND (RECURSION).
+        var time
+        time = setInterval('digitized()', 1000);
+    }
+   function Ticking(ticVal) {
+        if (ticVal < 10) {
+            ticVal = "0" + ticVal;
+        }
+        return ticVal;
+    }
+
+</script>
+
+    <script src="assets/js/vendor/jquery-2.1.4.min.js"></script>
+    <script src="charts.js"></script>
+    <script src="assets/js/plugins.js"></script>
+    <script src="assets/js/main.js"></script>
+	    <script src="assets/js/lib/chart-js/Chart.bundle.js"></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,218 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Cryptovote/Verification</title>
+    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="apple-icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <link rel="stylesheet" href="assets/css/normalize.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/themify-icons.css">
+    <link rel="stylesheet" href="assets/css/flag-icon.min.css">
+    <link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
+    <!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
+    <link rel="stylesheet" href="assets/scss/style.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+
+</head>
+<body onload="digitized();">
+        <!-- Left Panel -->
+
+    <aside id="left-panel" class="left-panel">
+        <nav class="navbar navbar-expand-sm navbar-default">
+
+            <div class="navbar-header">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" ><img src="images/logo.png" alt="Logo"></a>
+                <a class="navbar-brand hidden" href="./"><img src="images/logo2.png" alt="Logo"></a>
+            </div>
+
+            <div id="main-menu" class="main-menu collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="/admin"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
+                    </li>
+
+
+
+                    <li  >
+                        <a href="/addparty"   > <i class="menu-icon fa fa-plus-square-o"></i>Add new Party</a>
+
+                    </li >
+					               <li>
+                        <a href="/verifyuser"   > <i class="ti-view-list menu-icon "></i>Verify User Details</a>
+
+                    </li>
+            <li ><a href="/dashboard"><i class="menu-icon fa fa-line-chart"></i> Voting Stats</a></li>
+
+            </div><!-- /.navbar-collapse --><!-- /.navbar-collapse -->
+        </nav>
+    </aside><!-- /#left-panel -->
+
+    <!-- Left Panel -->
+
+    <!-- Right Panel -->
+
+    <div id="right-panel" class="right-panel">
+
+        <!-- Header-->
+        <header id="header" class="header">
+
+   <h1>
+   <div style="margin-left:80%; postion:absolute width:10%" >
+
+   <p>  Date/Time: <span id="datetime"></span></p>
+
+   </div>
+  User Details Verification
+   </h1>
+
+   </header>
+<div class="container p-4" >
+<table class="table table-responsive table-bordered table-condensed" id="data_table" style="background:#ffffff;">
+
+<thead>
+<tr>
+
+<th>S.No</th>
+<th>Name</th>
+
+<th>Email</th>
+<th>Status</th>
+
+<th>Mobile</th>
+<th>City</th>
+<th>State</th>
+<th>Country</th>
+<th>Pincode</th>
+<th>Uploded Document Type</th>
+<th>Uploaded Document Url</th>
+<th>Gender</th>
+<th>Date Of Birth </th>
+<th>Hash</th>
+<th>Registeration Date</th>
+
+
+
+
+</tr>
+</thead>
+<tbody>
+
+  <% for(var i=0; i < users.result.details.length; i++) { %>
+    <td><%= users.result.details[i].id %></td>
+    <td id="name_row_users.result.details[i].id"><%= users.result.details[i].full_name %></td>
+
+    <td id="email_row_users.result.details[i].id"><%= users.result.details[i].email %></td>
+    <td>
+
+      <% if(users.result.details[i].is_verified == 0){ %>
+        <input style="color:red" type="button" id="edit_button1" value="Confirm User" class="edit" onclick="change_verification('<%= users.result.details[i].id %>')">
+        <% } else{ %>
+   <h1 style="font-size:15px !important; color:green">User Verified</h1>
+<% } %>
+
+    </td>
+    <td id="mobile_no_row_users.result.details[i].id"><%= users.result.details[i].mobile_no %></td>
+    <td id="city_no_row_users.result.details[i].id"><%= users.result.details[i].city %></td>
+    <td id="state.result.details[i].id"><%= users.result.details[i].state %></td>
+    <td id="country.result.details[i].id"><%= users.result.details[i].country %></td>
+    <td id="pincode.result.details[i].id"><%= users.result.details[i].pincode %></td>
+    <td id="document_type.result.details[i].id"><%= users.result.details[i].document_type %></td>
+    <td id="document_uploaded_path.result.details[i].id"><a href='54.208.175.231:3000/<%= users.result.details[i].document_uploaded_path %>'>Click Here</a></td>
+    <td id="gender.result.details[i].id"><%= users.result.details[i].gender %></td>
+    <td id="date_of_birth.result.details[i].id"><%= users.result.details[i].date_of_birth %></td>
+    <td id="user_hash.result.details[i].id"><%= users.result.details[i].user_hash %></td>
+    <td id="reg_date.result.details[i].id"><%= users.result.details[i].reg_date %></td>
+
+
+
+    </tr>
+<% } %>
+
+
+
+
+</tbody>
+</table>
+  </div>
+
+</div>
+
+  </div>  <!-- Right Panel -->
+
+<script>
+
+
+    // OUR FUNCTION WHICH IS EXECUTED ON LOAD OF THE PAGE.
+    function digitized() {
+        var dt = new Date();    // DATE() CONSTRUCTOR FOR CURRENT SYSTEM DATE AND TIME.
+        var hrs = dt.getHours();
+        var min = dt.getMinutes();
+        var sec = dt.getSeconds();
+
+       // min = Ticking(min);
+        //sec = Ticking(sec);
+
+        document.getElementById('datetime').innerHTML = (("0"+dt.getDate()).slice(-2)) +"."+ (("0"+(dt.getMonth()+1)).slice(-2)) +"."+ (dt.getFullYear())+" / "+hrs + ":" + min+":"+sec;
+
+
+
+
+        // CALL THE FUNCTION EVERY 1 SECOND (RECURSION).
+        var time
+        time = setInterval('digitized()', 1000);
+    }
+   function Ticking(ticVal) {
+        if (ticVal < 10) {
+            ticVal = "0" + ticVal;
+        }
+        return ticVal;
+    }
+
+</script>
+
+
+<script src="verifydetails.js"></script>
+    <script src="assets/js/vendor/jquery-2.1.4.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/plugins.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+
+    <script>
+
+    function change_verification(user_id){
+      $.ajax({
+              url: 'http://54.208.175.231:3000/verifyuser',
+              type: 'post',
+              data:{'user_id':user_id},
+
+              success: function(data){
+                  alert("User is verified")
+              },
+
+          });
+
+    }
+
+
+    </script>
+
+</body>
+</html>
