@@ -46,7 +46,7 @@ function getAge(dateString) {
 
       console.log("AGGGGGGE",age)
     if(age < 18){
-      return false;
+      return 'InValid';
     }
     if(age >= 18 && age <24 ){
       return 'Age_group1'

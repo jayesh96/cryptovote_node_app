@@ -42,6 +42,7 @@
 
                     var user_gender = data1.chain[i].transactions[j].data['user_gender']
                     var user_age_group = data1.chain[i].transactions[j].data['age_group']
+                    console.log(user_age_group)
                     gender_count = parseInt(document.getElementById(user_gender).innerHTML)+1
                     document.getElementById(user_gender).innerHTML = gender_count
                     age_group_count = parseInt(document.getElementById(user_age_group).innerHTML)+1
