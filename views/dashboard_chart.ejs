@@ -64,7 +64,7 @@
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
 </head>
-<body onload="digitized(); drawchart(); dynamicpiechart();">
+<body onload="digitized();">
         <!-- Left Panel -->
 
     <aside id="left-panel" class="left-panel">
@@ -329,6 +329,7 @@ Age Group wise
 
     <script src="assets/js/vendor/jquery-2.1.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.1/Chart.min.js"></script>
+
 <script>
 function drawchart()
 {
@@ -582,74 +583,16 @@ function dynamicpiechart()
 
 
 </script>
-
-<!-- 
 <script>
 
-var canvas = document.getElementById("realbarchart");
-var ctx = canvas.getContext('2d');
-
-// Global Options:
-Chart.defaults.global.defaultFontColor = 'black';
-Chart.defaults.global.defaultFontSize = 16;
-
-var data = {
-  labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-  datasets: [{
-      label: "Real Time Vote Count",
-      fill: false,
-      lineTension: 0.1,
-      backgroundColor: "rgba(225,0,0,0.4)",
-      borderColor: "red", // The main line color
-      borderCapStyle: 'circle',
-      borderDash: [], // try [5, 15] for instance
-      borderDashOffset: 0.0,
-      borderJoinStyle: 'miter',
-      pointBorderColor: "black",
-      pointBackgroundColor: "white",
-      pointBorderWidth: 1,
-      pointHoverRadius: 8,
-      pointHoverBackgroundColor: "yellow",
-      pointHoverBorderColor: "brown",
-      pointHoverBorderWidth: 2,
-      pointRadius: 4,
-      pointHitRadius: 10,
-      // notice the gap in the data and the spanGaps: true
-      data: [65, 59, 80, 81, 56, 55, 40, ,60,55,30,78],
-      spanGaps: true,
-    }
-
-  ]
-};
-
-// Notice the scaleLabel at the same level as Ticks
-var options = {
-  scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                },
-                scaleLabel: {
-                     display: true,
-                     labelString: 'Moola',
-                     fontSize: 20
-                  }
-            }]
-        }
-};
-
-// Chart declaration:
-var myBarChart = new Chart(ctx, {
-  type: 'line',
-  data: data,
-  options: options
-});
+    setTimeout(function () {
+      drawchart();
+       dynamicpiechart();
+    }, 1000);
 
 
-</script> -->
-    <script src="assets/js/plugins.js"></script>
-    <script src="assets/js/main.js"></script>
-	    <script src="assets/js/lib/chart-js/Chart.bundle.js"></script>
+
+</script>
 
 
 
