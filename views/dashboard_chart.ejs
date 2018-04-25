@@ -41,13 +41,8 @@
                   for(j=0;j<data1.chain[i].transactions.length-1;j++){
 
                     var user_gender = data1.chain[i].transactions[j].data['user_gender']
-                    var user_age_group = data1.chain[i].transactions[j].data['age_group']
-                    console.log(user_age_group)
                     gender_count = parseInt(document.getElementById(user_gender).innerHTML)+1
                     document.getElementById(user_gender).innerHTML = gender_count
-                    age_group_count = parseInt(document.getElementById(user_age_group).innerHTML)+1
-                    document.getElementById(user_age_group).innerHTML = age_group_count
-                    document.getElementById('Voters_Turnout').innerHTML = parseInt(document.getElementById('Male').innerHTML) + parseInt(document.getElementById('Female').innerHTML)
 
                   }
                 }
@@ -57,6 +52,43 @@
 
 
         });
+
+
+        $(document).ready(function(){
+
+          $.ajax({
+
+                  url: 'http://54.208.175.231:5000/chain',
+                  type: 'get',
+                  cache:true,
+
+                  success: function(data1){
+                    for(i=1;i<data1.chain.length;i++){
+                      document.getElementById('blocks_mined').innerHTML = parseInt(i)
+                      for(j=0;j<data1.chain[i].transactions.length-1;j++){
+
+                      try {
+                        var user_age_group = data1.chain[i].transactions[j].data['age_group']
+                        console.log(user_age_group)
+
+                        age_group_count = parseInt(document.getElementById(user_age_group).innerHTML)+1
+                        document.getElementById(user_age_group).innerHTML = age_group_count
+                        document.getElementById('Voters_Turnout').innerHTML = parseInt(document.getElementById('Male').innerHTML) + parseInt(document.getElementById('Female').innerHTML)
+                        }
+                        catch(err) {
+                            console.log('error')
+                        }
+
+
+                      }
+                    }
+                  },
+        });
+
+
+
+            });
+
 
     </script>
 
