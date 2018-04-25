@@ -24,6 +24,7 @@
     <link href="assets/css/lib/vector-map/jqvmap.min.css" rel="stylesheet">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
@@ -148,121 +149,15 @@
                 </div>
             </div>
 
-				<div class="col-xl-3 col-lg-6">
-                <div class="card">
-                    <div class="card-body">
-                                              <img id="pimg2"class="img-responsive" src="noimg.png" >
-                            <div class="stat-content dib">
-                                <div class="stat-text" style="margin-top:25%">
-								               <p id="Party2" class="tetx-dark text-right">Set Party name</p>
-								</div>
-                        </div>
 
-						  <div class="card text-white bg-flat-color-5" height="600px">
-                    <div class="card-body pb-0" >
-
-                        <h2 class="mb-0 text-center" style="height:70px;  ">
-                            <span id="p1" class="count ">0</span>
-                        </h2>
-                     </div>
-                          </div>
-                    </div>
-                </div>
-            </div>
-				<div class="col-xl-3 col-lg-6">
-                <div class="card">
-                    <div class="card-body">
-                                              <img id="pimg1"class="img-responsive" src="noimg.png" >
-                            <div class="stat-content dib" >
-                                <div class="stat-text" style="margin-top:25%">
-								               <p id="Party3"class="tetx-dark text-right" >Set Party name</p>
-								</div>
-                        </div>
-
-						  <div class="card text-white bg-flat-color-5" height="600px">
-                    <div class="card-body pb-0" >
-
-                        <h2 class="mb-0 text-center" style="height:70px; w ">
-                            <span id="p2" class="count ">0</span>
-                        </h2>
-                     </div>
-                          </div>
-                    </div>
-                </div>
-            </div>
-			<div class="col-xl-3 col-lg-6">
-                <div class="card">
-                    <div class="card-body">
-                                              <img id="pimg1"class="img-responsive" src="noimg.png" >
-                            <div class="stat-content dib">
-                                <div class="stat-text" style="margin-top:25%">
-								               <p id="Party4"class="tetx-dark text-right">Set Party name </p>
-
-
-
-								</div>
-
-
-                        </div>
-
-					  <div class="card text-white bg-flat-color-5" height="600px">
-                    <div class="card-body pb-0" >
-
-                        <h2 class="mb-0 text-center" style="height:70px; w ">
-                            <span id="p3" class="count ">0</span>
-                        </h2>
-                     </div>
-                          </div>
-                    </div>
-                </div>
-            </div>
-
-	<div class="col-xl-3 col-lg-6">
-                <div class="card">
-                    <div class="card-body">
-                       <img id="pimg1"class="img-responsive" src="noimg.png" >
-                            <div class="stat-content dib">
-                                <div class="stat-text" style="margin-top:25%">
-								               <p id="Party1"class="text-dark text-right">Set party name</p>
-								</div>
-                        </div>
-
-						  <div class="card text-white bg-flat-color-5" height="600px">
-                    <div class="card-body pb-0" >
-
-                        <h2 class="mb-0 text-center" style="height:70px; ">
-                            <span id="p4"class="count ">0</span>
-                        </h2>
-                     </div>
-                          </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <!--/.col-->
-
-
-
-            <!--/.col-->
-
-            <!--/.col-->
-
-
-            <!--/.col-->
+          <div id='party_list'>
 
 
 
 
 
 
-
-
-
-
-
-
-
+        <div>
 
 
             <div class="col-xl-3 col-lg-6">
@@ -315,7 +210,7 @@
                             <div class="stat-icon dib"><i class="ti-info-alt text-warning border-success"></i></div>
                             <div class="stat-content dib">
                                 <div class="stat-text">No. of Parties</div>
-                                <div id="party count"class="stat-digit">0</div>
+                                <div id="party_count"class="stat-digit">0</div>
                             </div>
                         </div>
                     </div>
@@ -369,6 +264,65 @@
     <script src="assets/js/widgets.js"></script>
 
     </script>
+
+
+
+    <script>
+
+    $(document).ready(function(){
+
+      parties_list = [];
+      no_of_users = 0
+
+          $.ajax({
+                  url: 'http://localhost:3000/party/getpartylist',
+                  type: 'get',
+                  cache:true,
+
+                  success: function(party_list_data){
+                    var response = party_list_data.result.data
+                    for(i=0;i<response.length;i++){
+                      $('#party_list').append('<div class="col-xl-3 col-lg-6"><div class="card"><div class="card-body"><div class="stat-content dib"><div class="stat-text" style="margin-top:25%"><p id="Party2" class="tetx-dark text-right">'+response[i].registered_name+'</p></div></div><div class="card text-white bg-flat-color-5" height="600px"><div class="card-body pb-0" <h2 class="mb-0 text-center" style="height:70px;"><span class="count" id='+response[i].short_name+'>0</span></h2></div></div></div></div></div>');
+
+                      parties_list.push(response[i].short_name)
+                      document.getElementById('party_count').innerHTML = parties_list.length
+                      console.log(parties_list)
+                }
+
+                $.ajax({
+
+                        url: 'http://localhost:5000/chain',
+                        type: 'get',
+                        cache:true,
+
+                        success: function(data1){
+                          console.log(parties_list)
+
+                          for(i=1;i<data1.chain.length;i++){
+                            for(j=0;j<data1.chain[i].transactions.length-1;j++){
+                              no_of_users += j+1
+                              var party_name = data1.chain[i].transactions[j].data['party_short_name']
+                              console.log(party_name)
+                              party_count = parseInt(document.getElementById(party_name).innerHTML)+1
+                              console.log(party_count)
+                              document.getElementById('active-users').innerHTML = no_of_users
+                              document.getElementById(party_name).innerHTML = party_count
+                              console.log("----")
+
+                            }
+                          }
+                        },
+              });
+                    return true;
+              },
+          });
+
+
+        });
+
+    </script>
+
+
 
 </body>
 </html>

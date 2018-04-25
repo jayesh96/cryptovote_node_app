@@ -34,6 +34,39 @@ function makehash(key, text) {
 
 
 
+function getAge(dateString) {
+    var today = new Date();
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+
+
+      console.log("AGGGGGGE",age)
+    if(age < 18){
+      return false;
+    }
+    if(age >= 18 && age <24 ){
+      return 'Age_group1'
+    }
+    if(age >= 24 && age <42 ){
+      return 'Age_group2'
+    }
+    if(age >= 42 && age <60 ){
+      return 'Age_group3'
+    }
+
+    if(age>=60){
+      return 'Age_group4'
+    }
+
+}
+
+
+
+
 
 var INDEX = {
 
@@ -43,12 +76,16 @@ var INDEX = {
     user_hash_value_input = data.full_name+data.email_+data.phone_np+current_date_string
 
     Promise.all([makehash(user_hash_key,user_hash_value_input)]).then((response)=>{
-
-      console.log(data,"=======", uploaded_document_path,"---->",response,"!!!!!!",user_hash_value_input)
       var password_ = data.password_
       var encryptedpassword_ = encrypt(key, password_);
-      console.log("encrypted password:"+encryptedpassword_)
-      dbConnection.query("INSERT INTO user_profile (full_name,email,password,mobile_no,document_uploaded_path,reg_date,user_hash,gender,document_type) VALUES (?,?,?,?,?,NOW(),?,?,?)",[data.full_name,data.email_,encryptedpassword_,data.phone_np,uploaded_document_path,response[0],data.gender,data.document_type] ,function( err, result){
+      console.log(data.dob,"----!!")
+
+      var date_of_birth = new Date(data.dob);
+
+      console.log(date_of_birth.toDateString(),"------!!!!----AGGGGEE",getAge(date_of_birth))
+
+
+      dbConnection.query("INSERT INTO user_profile (full_name,email,password,mobile_no,document_uploaded_path,reg_date,user_hash,gender,document_type,date_of_birth,age_group) VALUES (?,?,?,?,?,NOW(),?,?,?,?,?)",[data.full_name,data.email_,encryptedpassword_,data.phone_np,uploaded_document_path,response[0],data.gender,data.document_type,date_of_birth,getAge(date_of_birth)] ,function( err, result){
         console.log(this.sql)
         if(err){
           console.log("Error in saving User Details, Try Again!");
@@ -113,7 +150,7 @@ var INDEX = {
 
 
   getAllUsers :function(callback){
-    dbConnection.query("Select * From user_profile ",function( err, result){
+    dbConnection.query("Select *,YEAR(CURDATE()) - YEAR(date_of_birth ) as age From user_profile ",function( err, result){
       if(err){
         console.log("Some Error Occurred");
         return callback(err);

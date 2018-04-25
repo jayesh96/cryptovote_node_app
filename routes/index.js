@@ -14,7 +14,7 @@ var storage = multer.diskStorage({
     cb(null, './uploads')
   },
   filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now())
+    cb(null, 'uploaded_doc' + '-' + Date.now())
   }
 })
 
@@ -104,11 +104,7 @@ router.post('/verifyuser', function(req, res, next) {
 
 });
 
-
-
 router.get('/login', function(req, res, next) {
-  console.log("hello")
-
   res.render('login', { title: 'Event Details' });
 });
 
@@ -116,8 +112,6 @@ router.get('/signup', function(req, res, next) {
   // res.render('index', { title: 'Express' });
   res.render('signup', { title: 'Event Details' });
 });
-
-
 
 
 router.post('/signup',upload_party.single('userDoc'), function(req, res, next) {

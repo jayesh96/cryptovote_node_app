@@ -127,7 +127,7 @@ desired effect
 
               <span class="progress-description">
                 <input styyl type='hidden' id='party_<%= obj.result.data[i].id %>' value='<%= obj.result.data[i].hash_address %>'>
-                    <input class='vote_button' type="button" id='party_<%= obj.result.data[i].id %>' style="background:red" onclick="add_transaction('<%= obj.result.data[i].hash_address %>','<%= user.response[0].user_hash %>','<%= obj.result.data[i].registered_name %>','<%= obj.result.data[i].short_name %>','<%= user.response[0].city %>','<%= user.response[0].state %>','<%= user.response[0].gender %>')"  value="VOTE"></input>
+                    <input class='vote_button' type="button" id='party_<%= obj.result.data[i].id %>' style="background:red" onclick="add_transaction('<%= obj.result.data[i].hash_address %>','<%= user.response[0].user_hash %>','<%= obj.result.data[i].registered_name %>','<%= obj.result.data[i].short_name %>','<%= user.response[0].city %>','<%= user.response[0].state %>','<%= user.response[0].gender %>','<%= user.response[0].age_group %>')"  value="VOTE"></input>
                   </span>
             </div>
             <!-- /.info-box-content -->
@@ -198,7 +198,7 @@ $(document).ready(function(){
   var current_user_hash = document.getElementById("user_id_hash").innerHTML
           $.ajax({
 
-                  url: 'http://54.208.175.231:5000/chain',
+                  url: 'http://localhost:5000/chain',
                   type: 'get',
                   cache:true,
 
@@ -229,10 +229,10 @@ $(document).ready(function(){
 
 <script type="text/javascript">
 
-function add_transaction(party_id,hash_value,party_name,party_short_name,user_city,user_state,user_gender){
+function add_transaction(party_id,hash_value,party_name,party_short_name,user_city,user_state,user_gender,age_group){
     $.ajax({
             type: 'POST',
-            url: 'http://54.208.175.231:3000/votenew/makeVoteTransaction',
+            url: 'http://localhost:3000/votenew/makeVoteTransaction',
             data: {
                 "recipient": party_id,
                 "datetime":new Date(),
@@ -241,7 +241,8 @@ function add_transaction(party_id,hash_value,party_name,party_short_name,user_ci
                 'party_short_name':party_short_name,
                 'user_city':user_city,
                 'user_state':user_state,
-                'user_gender':user_gender
+                'user_gender':user_gender,
+                'age_group':age_group
 
               },
             beforeSend:function(data){

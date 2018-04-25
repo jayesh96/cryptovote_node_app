@@ -115,7 +115,7 @@ function drawchart()
  //>>-------------------------------<<\\
 //>>---------------------------------<<\\
 
-var values=["8","40","22","11"]; //store json data in this array and pass it to data in pieChart
+var values=["8","40","100","11"]; //store json data in this array and pass it to data in pieChart
 var partyname=["BJP","INC","BSP","AAP"];
 var i;
 function dynamicpiechart()

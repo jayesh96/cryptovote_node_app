@@ -9,6 +9,7 @@
     <title>Cryptovote/Add Party</title>
     <meta name="description" content="Sufee Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <meta http-equiv="refresh" content="3"/> -->
 
     <link rel="apple-touch-icon" href="apple-icon.png">
     <link rel="shortcut icon" href="favicon.ico">
@@ -23,6 +24,42 @@
     <link rel="stylesheet" href="assets/scss/style.css">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+
+    $(document).ready(function(){
+
+      $.ajax({
+
+              url: 'http://localhost:5000/chain',
+              type: 'get',
+              cache:true,
+
+              success: function(data1){
+                for(i=1;i<data1.chain.length;i++){
+                  document.getElementById('blocks_mined').innerHTML = parseInt(i)
+                  for(j=0;j<data1.chain[i].transactions.length-1;j++){
+
+                    var user_gender = data1.chain[i].transactions[j].data['user_gender']
+                    var user_age_group = data1.chain[i].transactions[j].data['age_group']
+                    gender_count = parseInt(document.getElementById(user_gender).innerHTML)+1
+                    document.getElementById(user_gender).innerHTML = gender_count
+                    age_group_count = parseInt(document.getElementById(user_age_group).innerHTML)+1
+                    document.getElementById(user_age_group).innerHTML = age_group_count
+                    document.getElementById('Voters_Turnout').innerHTML = parseInt(document.getElementById('Male').innerHTML) + parseInt(document.getElementById('Female').innerHTML)
+
+                  }
+                }
+              },
+    });
+
+
+
+        });
+
+    </script>
+
+
 
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
@@ -89,8 +126,8 @@
                         <div class="stat-widget-one">
                             <div class="stat-icon dib"><i class="ti-mobile text-danger border-danger"></i></div>
                             <div class="stat-content dib">
-                                <div class="stat-text">Polling Stations</div>
-                                <div id="Polling-stations"class="stat-digit">0</div>
+                                <div class="stat-text">No of Blocks Mined</div>
+                                <div id="blocks_mined"class="stat-digit">0</div>
                             </div>
                         </div>
                     </div>
@@ -103,7 +140,7 @@
                             <div class="stat-icon dib"><i class="fa-male fa text-success border-success"></i></div>
                             <div class="stat-content dib">
                                 <div class="stat-text">Male Voters</div>
-                                <div id="Male-voters"class="stat-digit">0</div>
+                                <div id="Male"class="stat-digit">0</div>
                             </div>
                         </div>
                     </div>
@@ -116,7 +153,7 @@
                             <div class="stat-icon dib"><i class="fa fa-female  text-success border-success"></i></div>
                             <div class="stat-content dib">
                                 <div class="stat-text">Female voters</div>
-                                <div id="Female-voters"class="stat-digit">0</div>
+                                <div id="Female"class="stat-digit">0</div>
                             </div>
                         </div>
                     </div>
@@ -129,7 +166,7 @@
                             <div class="stat-icon dib"><i class="ti-stats-up text-primary border-primary"></i></div>
                             <div class="stat-content dib">
                                 <div class="stat-text">Voters Turnout</div>
-                                <div id="Voters-Turnout"class="stat-digit">0</div>
+                                <div id="Voters_Turnout"class="stat-digit">0</div>
                             </div>
                         </div>
                     </div>
@@ -147,7 +184,7 @@ Age Group wise
                             <div class="stat-icon dib"><i class="ti-tag text-primary border-primary "></i></div>
                             <div class="stat-content dib">
                                 <div class="stat-text">18-24</div>
-                                <div id="Agp1"class="stat-digit">0</div>
+                                <div id="Age_group1" class="stat-digit">0</div>
                             </div>
                         </div>
                     </div>
@@ -160,7 +197,7 @@ Age Group wise
                             <div class="stat-icon dib"><i class="ti-tag text-primary border-primary "></i></div>
                             <div class="stat-content dib">
                                 <div class="stat-text">24-42</div>
-                                <div id="Agp2"class="stat-digit">0</div>
+                                <div id="Age_group2"class="stat-digit">0</div>
                             </div>
                         </div>
                     </div>
@@ -173,7 +210,7 @@ Age Group wise
                             <div class="stat-icon dib"><i class="ti-tag text-primary border-primary "></i></div>
                             <div class="stat-content dib">
                                 <div class="stat-text">42-60</div>
-                                <div id="Agp3"class="stat-digit">0</div>
+                                <div id="Age_group3"class="stat-digit">0</div>
                             </div>
                         </div>
                     </div>
@@ -186,22 +223,23 @@ Age Group wise
                             <div class="stat-icon dib"><i class="ti-tag text-primary border-primary "></i></div>
                             <div class="stat-content dib">
                                 <div class="stat-text">Above 60</div>
-                                <div id="Agp4"class="stat-digit">0</div>
+                                <div id="Age_group4"class="stat-digit">0</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-			 <div class="col-xl-12 col-lg-9 p-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4 class="mb-3">Real Chart</h4>
-                                    <div class="flot-container">
-                                        <div id="loadvotes" class="cpu-load"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
+            <div class="col-xl-12 col-lg-9 p-4">
+      			<!-- <div class="card" > -->
+      			<!-- <div class="card-body">
+      				<h4 class="card-title">Voting Results</h4>
+      				<p class="card-text">Age wise voting</p>
+      				<canvas id="realbarchart"></canvas>
+      				</div> -->
+
+      			<!-- </div> -->
+      			</div>
 
 			<div class="col-xl-6 col-lg-6 p-4">
 			<div class="card" >
@@ -213,6 +251,8 @@ Age Group wise
 
 			</div>
 			</div>
+
+
 			<div class="col-xl-6 col-lg-6 p-4">
   <div class="card" >
     <div class="card-body">
@@ -236,6 +276,8 @@ Age Group wise
 
   </div>
 </div>
+
+
 <div class="col-xl-6 col-lg-6 p-4">
   <div class="card" >
     <div class="card-body">
@@ -286,7 +328,325 @@ Age Group wise
 </script>
 
     <script src="assets/js/vendor/jquery-2.1.4.min.js"></script>
-    <script src="assets/charts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.1/Chart.min.js"></script>
+<script>
+function drawchart()
+{
+	var a=90;
+	  //bar chart
+    var ctx = document.getElementById( "barChart" );
+    //    ctx.height = 200;
+    var myChart = new Chart( ctx, {
+        type: 'bar',
+        data: {
+            labels: [ "1996", "1998", "1999", "2004", "2009", "2014", "2017" ],
+            datasets: [
+                {
+                    label: "Total voting percentage per year",
+                    data: [ 57.94, 61.97, 59.99, 58.07, 58.17, 66.40, 68.04],
+                    borderColor: "rgba(0, 123, 255, 0.9)",
+                    borderWidth: "0",
+                    backgroundColor: "rgba(0, 123, 255, 0.5)"
+                            },
+
+                        ]
+        },
+        options: {
+            scales: {
+				xAxes: [{
+                ticks: {
+                        beginAtZero: true
+                    },
+						scaleLabel: {
+						display: true,
+						labelString: 'Years'
+									}
+            }],
+
+                 yAxes: [{ticks: {
+                        beginAtZero: true
+                    },
+						scaleLabel: {
+						display: true,
+						labelString: 'Percent  of  Votes'
+									}
+						}]
+
+            }
+        }
+    } );
+
+	//------------------------------------//
+
+	//line chart
+    var ctz = document.getElementById( "lineChart" );
+    ctz.height = 150;
+    var myChart = new Chart( ctz, {
+        type: 'line',
+        data: {
+            labels: [ "1996", "1998", "1999", "2004", "2009", "2014" ,"2017"],
+            datasets: [
+                {
+                    label: "Male Voters",
+                    borderColor: "rgba(0,0,0,.09)",
+                    borderWidth: "1",
+                    backgroundColor: "rgba(0,0,0,.07)",
+                    data: [ 62.06, 65.86, 63.96, 61.98, 60.82, 67.09,71.02]
+                            },
+                {
+                    label: "Female Voters",
+                    borderColor: "rgba(0, 123, 255, 0.9)",
+                    borderWidth: "1",
+                    backgroundColor: "rgba(0, 123, 255, 0.5)",
+                    pointHighlightStroke: "rgba(26,179,148,1)",
+                    data: [ 53.41, 57.69, 55.63, 53.63, 55.82, 65.63 ,75.64]
+                            }
+                        ]
+        },
+        options: {
+            responsive: true,
+            tooltips: {
+                mode: 'index',
+                intersect: false
+            },
+            hover: {
+                mode: 'nearest',
+                intersect: true
+            },
+			 scales: {
+				xAxes: [{
+                ticks: {
+                        beginAtZero: true
+                    },
+						scaleLabel: {
+						display: true,
+						labelString: 'Years'
+									}
+            }],
+
+                 yAxes: [{ticks: {
+                        beginAtZero: true
+                    },
+						scaleLabel: {
+						display: true,
+						labelString: 'Percent  of  Votes'
+									}
+						}]
+
+            }
+
+        }
+    } );
+
+
+
+
+
+
+
+
+
+}
+  //>>-----------------------------<<\\
+ //>>-------------------------------<<\\
+//>>---------------------------------<<\\
+
+var values=["8","40","100","11"]; //store json data in this array and pass it to data in pieChart
+var partyname=["BJP","INC","BSP","AAP"];
+var i;
+function dynamicpiechart()
+{
+
+	//PERCENT OF AREA=(100*VOTES IN FAVOR)/TOTAL VOTES;
+
+
+	 var ctv = document.getElementById( "pieChart" );
+    ctv.height = 150;
+    var myChart = new Chart( ctv, {
+        type: 'pie',
+        data: {
+            datasets: [ {
+                data: values,
+                backgroundColor: [
+                                    "rgba(0, 123, 255,0.9)",
+                                     "rgba(238, 93, 32, 0.8)",
+                                    "rgba(255, 0, 0,0.8)",
+                                    "rgba(56, 135, 86, 0.8)"
+                                ],
+
+                            } ],
+            labels: [
+               partyname[0],
+						   partyname[1],
+						   partyname[2],
+						   partyname[3]
+                        ]
+        },
+        options: {
+            responsive: true
+        }
+    } );
+
+
+    var ctage = document.getElementById( "ageChart" );
+    //    ctx.height = 200;
+    var myChart = new Chart( ctage, {
+        type: 'bar',
+        data: {
+            labels: [ "18-24", "24-42", "42-60", "60 & above" ],
+            datasets: [
+                {
+                    label: "Age group wise vote share",
+                    data: [ document.getElementById('Age_group1').innerHTML,document.getElementById('Age_group2').innerHTML,document.getElementById('Age_group3').innerHTML,document.getElementById('Age_group4').innerHTML],
+                    borderColor: "rgba(254, 102, 17, 0.8)",
+                    borderWidth: "5",
+                    backgroundColor: "rgba(254, 102, 17, 0.6)"
+                            },
+
+                        ]
+        },
+        options: {
+            scales: {
+				xAxes: [{
+                ticks: {
+                        beginAtZero: true
+                    },
+						scaleLabel: {
+						display: true,
+						labelString: 'Age(Years)'
+									}
+            }],
+
+                 yAxes: [{ticks: {
+                        beginAtZero: true
+                    },
+						scaleLabel: {
+						display: true,
+						labelString: 'Number of  Votes'
+									}
+						}]
+
+            }
+        }
+    } );
+
+
+
+    var ctage = document.getElementById( "genderChart" );
+    //    ctx.height = 200;
+    var myChart = new Chart( ctage, {
+        type: 'bar',
+        data: {
+            labels: [ "18-24", "24-42", "42-60", "60 & above" ],
+            datasets: [
+                {
+                    label: "Age group wise vote share",
+                    data: [ 46,15,19,20],
+                    borderColor: "rgba(254, 102, 17, 0.8)",
+                    borderWidth: "0",
+                    backgroundColor: "rgba(254, 102, 17, 0.6)"
+                            },
+
+                        ]
+        },
+        options: {
+            scales: {
+				xAxes: [{
+                ticks: {
+                        beginAtZero: true
+                    },
+						scaleLabel: {
+						display: true,
+						labelString: 'Age(Years)'
+									}
+            }],
+
+                 yAxes: [{ticks: {
+                        beginAtZero: true
+                    },
+						scaleLabel: {
+						display: true,
+						labelString: 'Number of  Votes'
+									}
+						}]
+
+            }
+        }
+    } );
+
+
+
+
+
+	}
+
+
+</script>
+
+<!-- 
+<script>
+
+var canvas = document.getElementById("realbarchart");
+var ctx = canvas.getContext('2d');
+
+// Global Options:
+Chart.defaults.global.defaultFontColor = 'black';
+Chart.defaults.global.defaultFontSize = 16;
+
+var data = {
+  labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+  datasets: [{
+      label: "Real Time Vote Count",
+      fill: false,
+      lineTension: 0.1,
+      backgroundColor: "rgba(225,0,0,0.4)",
+      borderColor: "red", // The main line color
+      borderCapStyle: 'circle',
+      borderDash: [], // try [5, 15] for instance
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: "black",
+      pointBackgroundColor: "white",
+      pointBorderWidth: 1,
+      pointHoverRadius: 8,
+      pointHoverBackgroundColor: "yellow",
+      pointHoverBorderColor: "brown",
+      pointHoverBorderWidth: 2,
+      pointRadius: 4,
+      pointHitRadius: 10,
+      // notice the gap in the data and the spanGaps: true
+      data: [65, 59, 80, 81, 56, 55, 40, ,60,55,30,78],
+      spanGaps: true,
+    }
+
+  ]
+};
+
+// Notice the scaleLabel at the same level as Ticks
+var options = {
+  scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                },
+                scaleLabel: {
+                     display: true,
+                     labelString: 'Moola',
+                     fontSize: 20
+                  }
+            }]
+        }
+};
+
+// Chart declaration:
+var myBarChart = new Chart(ctx, {
+  type: 'line',
+  data: data,
+  options: options
+});
+
+
+</script> -->
     <script src="assets/js/plugins.js"></script>
     <script src="assets/js/main.js"></script>
 	    <script src="assets/js/lib/chart-js/Chart.bundle.js"></script>

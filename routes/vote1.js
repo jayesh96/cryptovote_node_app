@@ -19,7 +19,8 @@ router.post('/makeVoteTransaction',function(req, res,next){
       "party_short_name":req.body['party_short_name'],
     "user_city":req.body['user_city'],
     "user_state":req.body['user_state'],
-    "user_gender":req.body['user_gender']
+    "user_gender":req.body['user_gender'],
+    "age_group":req.body['age_group']
   }
   myJSONObject = {
       "sender": req.body['user_hash_value'],
@@ -29,7 +30,7 @@ router.post('/makeVoteTransaction',function(req, res,next){
   }
 
   request({
-    url: "http://54.208.175.231:5000/transactions/new",
+    url: "http://localhost:5000/transactions/new",
     method: "POST",
     json: true,   // <--Very important!!!
     body: myJSONObject
