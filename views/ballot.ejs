@@ -198,7 +198,7 @@ $(document).ready(function(){
   var current_user_hash = document.getElementById("user_id_hash").innerHTML
           $.ajax({
 
-                  url: 'http://localhost:5000/chain',
+                  url: 'http://54.208.175.231:5000/chain',
                   type: 'get',
                   cache:true,
 
@@ -232,7 +232,7 @@ $(document).ready(function(){
 function add_transaction(party_id,hash_value,party_name,party_short_name,user_city,user_state,user_gender,age_group){
     $.ajax({
             type: 'POST',
-            url: 'http://localhost:3000/votenew/makeVoteTransaction',
+            url: 'http://54.208.175.231:3000/votenew/makeVoteTransaction',
             data: {
                 "recipient": party_id,
                 "datetime":new Date(),
