@@ -115,7 +115,7 @@ desired effect
 
            <% for (var i = 0; i < obj.result.data.length; i++) { %>
           <div style="border-radius:20px; background-color:#367fa9 !important"class="info-box bg-yellow">
-            <span style="border-radius:20px" class="info-box-icon"><img stsrc='https://upload.wikimedia.org/wikipedia/commons/4/44/Bharatiya_Janata_Party_%28icon%29.jpg'></span>
+            <span style="border-radius:20px" class="info-box-icon"><img src='https://upload.wikimedia.org/wikipedia/commons/4/44/Bharatiya_Janata_Party_%28icon%29.jpg'></span>
 
             <div class="info-box-content">
               <span class="info-box-text"><%= obj.result.data[i].registered_name %></span>
@@ -198,7 +198,7 @@ $(document).ready(function(){
   var current_user_hash = document.getElementById("user_id_hash").innerHTML
           $.ajax({
 
-                  url: 'http://54.208.175.231:5000/chain',
+                  url: 'http://localhost:5000/chain',
                   type: 'get',
                   cache:true,
 
@@ -232,7 +232,7 @@ $(document).ready(function(){
 function add_transaction(party_id,hash_value,party_name,party_short_name,user_city,user_state,user_gender,age_group){
     $.ajax({
             type: 'POST',
-            url: 'http://54.208.175.231:3000/votenew/makeVoteTransaction',
+            url: 'http://localhost:3000/votenew/makeVoteTransaction',
             data: {
                 "recipient": party_id,
                 "datetime":new Date(),
@@ -246,6 +246,7 @@ function add_transaction(party_id,hash_value,party_name,party_short_name,user_ci
 
               },
             beforeSend:function(data){
+              alert("Your Vote Is Recieved")
               $("input[type=button]").attr("disabled", "disabled");
             },
 

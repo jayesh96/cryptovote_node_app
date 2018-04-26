@@ -11,7 +11,7 @@ var upload = multer({ dest: 'uploads/' })
 const modelVote = require('../models/vote.js');
 
 router.post('/makeVoteTransaction',function(req, res,next){
-  console.log(req.body)
+  console.log(req.body,"ENTERED MAKE VOTE TRANSACTION")
 
   data_params = {
     "datetime": req.body['datetime'],
@@ -30,7 +30,7 @@ router.post('/makeVoteTransaction',function(req, res,next){
   }
 
   request({
-    url: "http://54.208.175.231:5000/transactions/new",
+    url: "http://localhost:5000/transactions/new",
     method: "POST",
     json: true,   // <--Very important!!!
     body: myJSONObject
