@@ -120,7 +120,7 @@ var INDEX = {
   loginUser :function(username,password,callback){
     var encryptedpassword_ = encrypt(key, password);
     console.log("-------------------->encrypted password:<----------"+encryptedpassword_)
-    dbConnection.query("Select * From user_profile where email=? and password =? LIMIT 1",[username,encryptedpassword_] ,function( err, result){
+    dbConnection.query("Select *,YEAR(CURDATE()) - YEAR(date_of_birth ) as age From user_profile where email=? and password =? LIMIT 1",[username,encryptedpassword_] ,function( err, result){
       console.log(this.sql)
       if(err){
         console.log("Some Error Occurred");
@@ -155,6 +155,7 @@ var INDEX = {
         console.log("Some Error Occurred");
         return callback(err);
       }else{
+        console.log(result)
         var user = new Object();
         user.status = true;
         user.details = result;

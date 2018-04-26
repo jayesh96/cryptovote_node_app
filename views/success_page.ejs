@@ -88,16 +88,7 @@ desired effect
     </section>
 
     <!-- Main content -->
-    <section class="content container-fluid">
 
-      <div class="row">
-        <div id='party_list'>
-
-
-          </div>
-
-
-    </section>
 
     <section class="content container-fluid">
 
@@ -107,44 +98,22 @@ desired effect
           <!-- Widget: user widget style 1 -->
           <div class="box box-widget widget-user">
             <!-- Add the bg color to the header using any of the bg-* classes -->
-            <div class="widget-user-header bg-aqua-active">
-              <h3 class="widget-user-username"><b><%= user.response[0].full_name %></b></h3>
+            <div class="widget-user-header bg-green-active">
             </div>
             <div class="widget-user-image">
-              <img class="img-circle" src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-512.png" alt="User Avatar">
+              <img class="img-circle" src="http://pluspng.com/img-png/success-png-success-icon-image-23194-400.png" alt="User Avatar">
             </div>
             <div class="box-footer">
               <div class="row">
                 <div class="col-sm-4 border-right">
                   <div class="description-block">
-                    <h5 class="description-header"><%= user.response[0].user_hash %></h5>
-                    <span class="description-text">Hash Address</span>
+                    <h5 class="description-header">Congratulations!</h5>
+                    <span class="description-text">You Have Successfully Registered Your Vote!</span>
                   </div>
                   <!-- /.description-block -->
                 </div>
                 <!-- /.col -->
-                <div class="col-sm-4 border-right">
-                  <div class="description-block">
-                    <h5 class="description-header"><%= user.response[0].mobile_no %></h5>
-                    <span class="description-text">Contact No</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-4">
-                  <div class="description-block">
-                    <h5 class="description-header"><%= user.response[0].gender %></h5>
-                    <span class="description-text">Gender</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-                <div class="col-sm-4">
-                  <div class="description-block">
-                    <h5 class="description-header"><%= user.response[0].age %> Years</h5>
-                    <span class="description-text">Age </span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
+
 
 
 
@@ -158,20 +127,8 @@ desired effect
 
       </div>
       <div class="row">
+        <button type="button" onClick='mine_vote()' class="btn btn-block btn-danger btn-lg">Please Click Here To Mine Your Vote</button>
 
-        <% if(user.response[0].age < 18){ %>
-          <button type="button" class="btn btn-block btn-danger btn-lg">You are Not Eligible To Vote</button>
-
-   <% } else{ %>
-     <% if(user.response[0].is_verified==0){ %>
-       <button type="button" class="btn btn-block btn-danger btn-lg">Please Wait For your Verification</button>
-
-<% } else{ %>
-  <a href="/vote/ballot"><button type="button" class="btn btn-block btn-danger btn-lg">Click Here to Vote</button></a>
-
-<% } %>
-
-  <% } %>
 
 
 
@@ -223,59 +180,26 @@ desired effect
 <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../dist/js/adminlte.min.js"></script>
+
 <script>
+function mine_vote(){
 
-$(document).ready(function(){
-var parties_list =  []
+          $.ajax({
 
-  $.ajax({
-          url: 'http://54.208.175.231:3000/party/getpartylist',
-          type: 'get',
-          cache:true,
+                  url: 'http://54.208.175.231:5000/mine',
+                  type: 'get',
+                  cache:true,
 
-          success: function(party_list_data){
-            var response = party_list_data.result.data
-            for(i=0;i<response.length;i++){
-              $('#party_list').append('<div class="col-lg-3 col-xs-6"><div class="small-box bg-green"><div class="inner"><h3 id='+response[i].short_name+'>0</h3><p>'+response[i].short_name+'<p>'+response[i].registered_name+'</p></div><div class="icon"><i class="ion ion-bag"></i></div></div></div>');
-              parties_list.push(response[i].short_name)
-              console.log(parties_list)
-        }
+                  success: function(data1){
+                    alert('Your Vote Has Been Mined')
+                    document.location.href = "/vote/home"
+                  },
+        });
 
-        $.ajax({
+      return false;
+    };
 
-                url: 'http://54.208.175.231:5000/chain',
-                type: 'get',
-                cache:true,
-
-                success: function(data1){
-                  console.log(parties_list)
-
-                  for(i=1;i<data1.chain.length;i++){
-                    for(j=0;j<data1.chain[i].transactions.length-1;j++){
-
-                      var party_name = data1.chain[i].transactions[j].data['party_short_name']
-                      party_count = parseInt(document.getElementById(party_name).innerHTML)+1
-                      console.log(party_count)
-                      document.getElementById(party_name).innerHTML = party_count
-                      console.log("----")
-
-                    }
-                  }
-                },
-      });
-
-            return true;
-      },
-  });
-
-
-
-
-});
-
-
-</script>
-
+  </script>
 
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.

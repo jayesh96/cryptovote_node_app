@@ -115,7 +115,7 @@ desired effect
 
            <% for (var i = 0; i < obj.result.data.length; i++) { %>
           <div style="border-radius:20px; background-color:#367fa9 !important"class="info-box bg-yellow">
-            <span style="border-radius:20px" class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
+            <span style="border-radius:20px" class="info-box-icon"><img stsrc='https://upload.wikimedia.org/wikipedia/commons/4/44/Bharatiya_Janata_Party_%28icon%29.jpg'></span>
 
             <div class="info-box-content">
               <span class="info-box-text"><%= obj.result.data[i].registered_name %></span>
@@ -126,7 +126,7 @@ desired effect
               </div>
 
               <span class="progress-description">
-                <input styyl type='hidden' id='party_<%= obj.result.data[i].id %>' value='<%= obj.result.data[i].hash_address %>'>
+                <input type='hidden' id='party_<%= obj.result.data[i].id %>' value='<%= obj.result.data[i].hash_address %>'>
                     <input class='vote_button' type="button" id='party_<%= obj.result.data[i].id %>' style="background:red" onclick="add_transaction('<%= obj.result.data[i].hash_address %>','<%= user.response[0].user_hash %>','<%= obj.result.data[i].registered_name %>','<%= obj.result.data[i].short_name %>','<%= user.response[0].city %>','<%= user.response[0].state %>','<%= user.response[0].gender %>','<%= user.response[0].age_group %>')"  value="VOTE"></input>
                   </span>
             </div>
@@ -251,6 +251,9 @@ function add_transaction(party_id,hash_value,party_name,party_short_name,user_ci
 
             success: function(data) {
                 alert("You Have Successfully Voted")
+                document.location.href = "/vote/success"
+
+
             }
         });
 

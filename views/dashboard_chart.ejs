@@ -205,11 +205,13 @@
                     </div>
                 </div>
             </div>
-<header class=" header ">
-<h3 class="mx-auto">
-Age Group wise
-</h3>
-</header>
+            <div class="col-sm-12">
+                <div class="alert  alert-success alert-dismissible fade show" role="alert">
+                  <span class="badge badge-pill badge-success"></span><b>Today's Voting Analysis</b>
+
+                </div>
+            </div>
+
 <div class="col-xl-3 col-lg-6 p-4">
                 <div class="card">
                     <div class="card-body">
@@ -297,6 +299,12 @@ Age Group wise
   </div>
 </div>
 
+<div class="col-sm-12">
+    <div class="alert  alert-success alert-dismissible fade show" role="alert">
+      <span class="badge badge-pill badge-success"></span><b>Previous Trends In Voting</b>
+
+    </div>
+</div>
 
 	<div class="col-xl-6 col-lg-6 p-4">
   <div class="card" >
@@ -485,11 +493,14 @@ function drawchart()
  //>>-------------------------------<<\\
 //>>---------------------------------<<\\
 
-var values=["8","40","100","11"]; //store json data in this array and pass it to data in pieChart
-var partyname=["BJP","INC","BSP","AAP"];
+var values=[]; //store json data in this array and pass it to data in pieChart
+var partyname=["Male","Female"];
 var i;
 function dynamicpiechart()
 {
+  values[0] =document.getElementById('Male').innerHTML
+  values[1] = document.getElementById('Female').innerHTML
+  console.log(values)
 
 	//PERCENT OF AREA=(100*VOTES IN FAVOR)/TOTAL VOTES;
 
@@ -512,8 +523,7 @@ function dynamicpiechart()
             labels: [
                partyname[0],
 						   partyname[1],
-						   partyname[2],
-						   partyname[3]
+
                         ]
         },
         options: {
@@ -620,8 +630,11 @@ function dynamicpiechart()
 
     setTimeout(function () {
       drawchart();
-       dynamicpiechart();
     }, 1000);
+
+    setTimeout(function () {
+       dynamicpiechart();
+    }, 3000);
 
 
 

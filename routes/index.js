@@ -43,7 +43,7 @@ router.get('/addparty', function(req, res, next) {
 });
 
 
-router.post('/addparty',upload_party.single('party_logo'), function(req, res, next) {
+router.post('/addparty', function(req, res, next) {
   console.log(req)
   res.json('ok')
 

@@ -22,9 +22,16 @@ router.get('/upload', function(req, res, next) {
 
 router.get('/home', function(req, res, next) {
 
-  res.render('home', { title: 'Event Details',current_time:current_time });
+  res.render('home', { current_time:current_time });
 
 });
+
+router.get('/success', function(req, res, next) {
+
+  res.render('success_page', { current_time:current_time });
+
+});
+
 router.get('/votenow', function(req, res, next) {
   // res.render('index', { title: 'Express' });
   res.render('votenow', { user:req.user ,current_time:current_time});
