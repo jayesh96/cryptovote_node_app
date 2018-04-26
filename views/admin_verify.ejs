@@ -140,7 +140,7 @@
     <td id="country.result.details[i].id"><%= users.result.details[i].country %></td>
     <td id="pincode.result.details[i].id"><%= users.result.details[i].pincode %></td> -->
     <td id="document_type.result.details[i].id"><%= users.result.details[i].document_type %></td>
-    <td onclick="windows.location.href=''" id="document_uploaded_path.result.details[i].id">localhost:3000/<%= users.result.details[i].document_uploaded_path %></td>
+    <td onclick="windows.location.href=''" id="document_uploaded_path.result.details[i].id">54.208.175.231:3000/<%= users.result.details[i].document_uploaded_path %></td>
     <td id="gender.result.details[i].id"><%= users.result.details[i].gender %></td>
     <td id="date_of_birth.result.details[i].id"><%= users.result.details[i].date_of_birth %></td>
     <td id="user_hash.result.details[i].id"><%= users.result.details[i].user_hash %></td>
@@ -206,7 +206,7 @@
 
     function change_verification(user_id){
       $.ajax({
-              url: 'http://localhost:3000/verifyuser',
+              url: 'http://54.208.175.231:3000/verifyuser',
               type: 'post',
               data:{'user_id':user_id},
 
