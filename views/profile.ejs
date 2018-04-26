@@ -151,7 +151,7 @@ desired effect
 
                 <div class="col-sm-4 border-right">
                   <div class="description-block">
-                    <h5 class="description-header"><a href="http://localhost:3000/<%= user.response[0].document_uploaded_path %>"><%= user.response[0].document_type %></a></h5>
+                    <h5 class="description-header"><a href="http://54.208.175.231:3000/<%= user.response[0].document_uploaded_path %>"><%= user.response[0].document_type %></a></h5>
                     <span class="description-text">Uploaded Document</span>
                   </div>
                   <!-- /.description-block -->
@@ -169,7 +169,7 @@ desired effect
       </div>
       <div class="row">
 
-        <button type="button" class="btn btn-block btn-success btn-lg" onclick="window.location.href='http://localhost:3000/vote/votenow'">Back</button>
+        <button type="button" class="btn btn-block btn-success btn-lg" onclick="window.location.href='http://54.208.175.231:3000/vote/votenow'">Back</button>
 
   </div>
 
@@ -224,7 +224,7 @@ $(document).ready(function(){
 
 
       $.ajax({
-              url: 'http://localhost:3000/party/getpartylist',
+              url: 'http://54.208.175.231:3000/party/getpartylist',
               type: 'get',
               cache:true,
 

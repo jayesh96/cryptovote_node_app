@@ -11,7 +11,7 @@ var upload = multer({ dest: 'uploads/' })
 const modelVote = require('../models/vote.js');
 
 router.post('/makeVoteTransaction',function(req, res,next){
-  console.log(req.body)
+  console.log(req.body,"ENTERED HERE")
 
   data_params = {
     "datetime": req.body['datetime'],
