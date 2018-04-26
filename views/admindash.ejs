@@ -182,8 +182,8 @@
                         <div class="stat-widget-one">
                             <div class="stat-icon dib"><i class="ti-user text-success border-success"></i></div>
                             <div class="stat-content dib">
-                                <div class="stat-text">Active users</div>
-                                <div id="active-users"class="stat-digit">0</div>
+                                <div class="stat-text">Not Verified users</div>
+                                <div id="non_verified_users" class="stat-digit">0</div>
                             </div>
                         </div>
                     </div>
@@ -196,8 +196,8 @@
                         <div class="stat-widget-one">
                             <div class="stat-icon dib"><i class="ti-check text-warning border-success"></i></div>
                             <div class="stat-content dib">
-                                <div class="stat-text">Registered Users</div>
-                                <div id="registered_users"class="stat-digit">0</div>
+                                <div class="stat-text">Verified Users</div>
+                                <div id="verified_users"class="stat-digit">0</div>
                             </div>
                         </div>
                     </div>
@@ -282,7 +282,7 @@
                   success: function(party_list_data){
                     var response = party_list_data.result.data
                     for(i=0;i<response.length;i++){
-                      $('#party_list').append('<div class="col-xl-3 col-lg-6"><div class="card"><div class="card-body"><div class="stat-content dib"><div class="stat-text" style="margin-top:25%"><p id="Party2" class="tetx-dark text-right">'+response[i].registered_name+'</p></div></div><div class="card text-white bg-flat-color-5" height="600px"><div class="card-body pb-0" <h2 class="mb-0 text-center" style="height:70px;"><span class="count" id='+response[i].short_name+'>0</span></h2></div></div></div></div></div>');
+                      $('#party_list').append('<div class="col-xl-6 col-lg-6"><div class="card"><div class="card-body"><div class="stat-content dib"><div class="stat-text" style="margin-top:25%"><p id="Party2" style="text-align:left !important" class="tetx-dark text-right">'+response[i].registered_name+'</p></div></div><div class="card text-white bg-flat-color-5" height="600px"><div class="card-body pb-0" <h2 class="mb-0 text-center" style="height:70px;"><span class="count" id='+response[i].short_name+'>0</span></h2></div></div></div></div></div>');
 
                       parties_list.push(response[i].short_name)
                       document.getElementById('party_count').innerHTML = parties_list.length
@@ -316,6 +316,45 @@
                     return true;
               },
           });
+
+
+        });
+
+    </script>
+
+
+    <script>
+
+    $(document).ready(function(){
+
+      $.ajax({
+
+              url: 'http://54.208.175.231:3000/userlist',
+              type: 'get',
+              cache:true,
+
+              success: function(data1){
+                console.log(data1.result.details)
+                for(i=1;i<data1.result.details.length;i++){
+
+
+                  if(data1.result.details[i].is_verified == 1){
+                  active_users_count = parseInt(document.getElementById('verified_users').innerHTML)+1
+                  document.getElementById('verified_users').innerHTML = active_users_count
+                }
+
+                if(data1.result.details[i].is_verified == 0){
+                active_users_count = parseInt(document.getElementById('non_verified_users').innerHTML)+1
+                document.getElementById('non_verified_users').innerHTML = active_users_count
+              }
+
+                }
+
+
+              },
+    });
+
+
 
 
         });

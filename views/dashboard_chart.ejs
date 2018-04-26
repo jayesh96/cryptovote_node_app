@@ -93,6 +93,78 @@
     </script>
 
 
+    <script>
+
+    $(document).ready(function(){
+
+      var parties_list = [];
+      no_of_users = 0
+
+          $.ajax({
+                  url: 'http://54.208.175.231:3000/party/getpartylist',
+                  type: 'get',
+                  cache:true,
+
+                  success: function(party_list_data){
+                    var response = party_list_data.result.data
+                    for(i=0;i<response.length;i++){
+                      $('#party_list').append('<div class="col-xl-6 col-lg-6"><div class="card"><div class="card-body"><div class="stat-content dib"><div class="stat-text" style="margin-top:25%"><p id="Party2" style="text-align:left !important" class="tetx-dark text-right">'+response[i].registered_name+'</p></div></div><div class="card text-white bg-flat-color-5" height="600px"><div class="card-body pb-0" <h2 class="mb-0 text-center" style="height:70px;"><span class="count" id='+response[i].short_name+'>0</span></h2></div></div></div></div></div>');
+
+                      parties_list.push(response[i].short_name)
+                      console.log(parties_list)
+                }
+
+                $.ajax({
+
+                        url: 'http://54.208.175.231:5000/chain',
+                        type: 'get',
+                        cache:true,
+
+                        success: function(data1){
+                          setTimeout(function () {
+                             dynamicpiechart1(parties_list);
+                          }, 2500);
+
+                          for(i=1;i<data1.chain.length;i++){
+                            for(j=0;j<data1.chain[i].transactions.length-1;j++){
+                              no_of_users += j+1
+                              var party_name = data1.chain[i].transactions[j].data['party_short_name']
+                              console.log(party_name)
+                              party_count = parseInt(document.getElementById(party_name).innerHTML)+1
+                              console.log(party_count)
+                              document.getElementById(party_name).innerHTML = party_count
+                              console.log("----")
+
+                            }
+                          }
+                        },
+              });
+                    return true;
+              },
+          });
+
+
+        });
+
+
+
+        setTimeout(function () {
+          drawchart();
+        }, 500);
+
+        setTimeout(function () {
+           dynamicpiechart();
+        }, 1000);
+
+
+
+
+
+
+    </script>
+
+
+
 
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
@@ -265,16 +337,25 @@
                 </div>
             </div>
 
-            <div class="col-xl-12 col-lg-9 p-4">
-      			<!-- <div class="card" > -->
-      			<!-- <div class="card-body">
-      				<h4 class="card-title">Voting Results</h4>
-      				<p class="card-text">Age wise voting</p>
-      				<canvas id="realbarchart"></canvas>
-      				</div> -->
 
-      			<!-- </div> -->
+            <div class="col-sm-12">
+                <div class="alert  alert-success alert-dismissible fade show" role="alert">
+                  <span class="badge badge-pill badge-success"></span><b>Party Vote Count</b>
+
+                </div>
+            </div>
+
+            <div id='party_list' class="col-xl-12 col-lg-9 p-4">
+
       			</div>
+
+
+            <div class="col-sm-12">
+                <div class="alert  alert-success alert-dismissible fade show" role="alert">
+                  <span class="badge badge-pill badge-success"></span><b>Voting Analysis</b>
+
+                </div>
+            </div>
 
 			<div class="col-xl-6 col-lg-6 p-4">
 			<div class="card" >
@@ -299,6 +380,18 @@
   </div>
 </div>
 
+<div class="col-xl-12 col-lg-6 p-4">
+<div class="card" >
+  <div class="card-body">
+    <h4 class="card-title"> <i class="fab fa-stripe-s"></i> Voting Result</h4>
+    <p class="card-text">Party Wise Votes</p>
+
+  <canvas id="partyChart"></canvas>
+  </div>
+
+</div>
+</div>
+
 <div class="col-sm-12">
     <div class="alert  alert-success alert-dismissible fade show" role="alert">
       <span class="badge badge-pill badge-success"></span><b>Previous Trends In Voting</b>
@@ -317,6 +410,9 @@
 
   </div>
 </div>
+
+
+
 
 
 <div class="col-xl-6 col-lg-6 p-4">
@@ -493,14 +589,13 @@ function drawchart()
  //>>-------------------------------<<\\
 //>>---------------------------------<<\\
 
-var values=[]; //store json data in this array and pass it to data in pieChart
-var partyname=["Male","Female"];
+var values_1=[]; //store json data in this array and pass it to data in pieChart
+var partyname_1=["Male","Female"];
 var i;
 function dynamicpiechart()
 {
-  values[0] =document.getElementById('Male').innerHTML
-  values[1] = document.getElementById('Female').innerHTML
-  console.log(values)
+  values_1[0] =document.getElementById('Male').innerHTML
+  values_1[1] = document.getElementById('Female').innerHTML
 
 	//PERCENT OF AREA=(100*VOTES IN FAVOR)/TOTAL VOTES;
 
@@ -511,7 +606,7 @@ function dynamicpiechart()
         type: 'pie',
         data: {
             datasets: [ {
-                data: values,
+                data: values_1,
                 backgroundColor: [
                                     "rgba(0, 123, 255,0.9)",
                                      "rgba(238, 93, 32, 0.8)",
@@ -521,8 +616,8 @@ function dynamicpiechart()
 
                             } ],
             labels: [
-               partyname[0],
-						   partyname[1],
+               partyname_1[0],
+						   partyname_1[1],
 
                         ]
         },
@@ -530,6 +625,9 @@ function dynamicpiechart()
             responsive: true
         }
     } );
+
+
+
 
 
     var ctage = document.getElementById( "ageChart" );
@@ -626,19 +724,60 @@ function dynamicpiechart()
 
 
 </script>
+
+
+
 <script>
 
-    setTimeout(function () {
-      drawchart();
-    }, 1000);
+var values=[]; //store json data in this array and pass it to data in pieChart
 
-    setTimeout(function () {
-       dynamicpiechart();
-    }, 3000);
+var i;
+function dynamicpiechart1(party_list)
+{
+
+  partyname = party_list
+
+  for(i=0;i<partyname.length;i++){
+  values[i] =parseInt(document.getElementById(partyname[i]).innerHTML)
+}
+  //PERCENT OF AREA=(100*VOTES IN FAVOR)/TOTAL VOTES;
 
 
+   var ctv = document.getElementById( "partyChart" );
+    ctv.height = 150;
+    var myChart = new Chart( ctv, {
+        type: 'pie',
+        data: {
+            datasets: [ {
+                data: values,
+                backgroundColor: [
+                                    "rgba(0, 123, 255,0.9)",
+                                     "rgba(238, 93, 32, 0.8)",
+                                    "rgba(255, 0, 0,0.8)",
+                                    "rgba(56, 135, 86, 0.8)"
+                                ],
+
+                            } ],
+            labels: [
+               partyname[0],
+               partyname[1],
+               partyname[2],
+               partyname[3],
+               partyname[4],
+
+                        ]
+        },
+        options: {
+            responsive: true
+        }
+    } );
+
+
+
+}
 
 </script>
+
 
 
 

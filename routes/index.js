@@ -23,7 +23,6 @@ var upload = multer({ storage: storage })
 var upload_party = multer({ storage: storage })
 
 
-console.log(upload_party,"---->")
 
 router.get('/', function(req, res, next) {
   res.render('splash', {});
@@ -44,7 +43,7 @@ router.get('/addparty', function(req, res, next) {
 
 
 router.post('/addparty', function(req, res, next) {
-  console.log(req)
+  console.log(req.body)
   res.json('ok')
 
 })
@@ -77,6 +76,38 @@ router.get('/verifyuser', function(req, res, next) {
   });
 
 });
+
+
+
+
+router.get('/userlist', function(req, res, next) {
+  modelIndex.getAllUsers(function(err, result){
+
+        if(err)
+        {
+
+       var obj= new Object();
+       obj.status=false;
+       obj.message=err.sqlMessage;
+
+       res.json(obj);
+     }
+     else
+     {
+       var myJSON = JSON.stringify(result);
+       console.log("output "+myJSON);
+
+       var obj= new Object();
+       obj.status=true;
+       obj.result = result
+       obj.message='OK!';
+       res.json(obj);
+
+     }
+  });
+
+});
+
 
 
 router.post('/verifyuser', function(req, res, next) {
