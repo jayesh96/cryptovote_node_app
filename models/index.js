@@ -3,6 +3,8 @@ const moment = require('moment');
 var crypto = require("crypto")
 var key = "supersecretkey";
 var user_hash_key = 'someuserhashkey'
+var party_hash_key = 'somepartyhashkey'
+
 
 
 function encrypt(key, text) {
@@ -167,6 +169,33 @@ var INDEX = {
     });
 
   },
+
+
+  addParty :function(party,callback){
+    console.log(party,"-----!!!!------>")
+    var current_date = new Date();
+    var current_date_string = Math.floor(Date.now() / 1000);
+    party_hash_value_input = party.name+party.sname+current_date_string
+    encrypted_party_hash = makehash(party_hash_key,party_hash_value_input).substring(5,25)
+    console.log(encrypted_party_hash,"====>")
+    dbConnection.query("INSERT INTO election_party (registered_name,short_name,hash_address,reg_date) VALUES (?,?,?,NOW()) ",[party.name,party.sname,encrypted_party_hash],function( err, result){
+      if(err){
+        console.log("Some Error Occurred");
+        return callback(err);
+      }else{
+        console.log(result)
+        var party = new Object();
+        party.status = true;
+        party.details = result;
+        return callback(null,party);
+
+      }
+
+
+    });
+
+  },
+
 
   updateUserStatus:function(user_id,callback){
     dbConnection.query("UPDATE user_profile SET is_verified =1 where id =?",[user_id],function( err, result){

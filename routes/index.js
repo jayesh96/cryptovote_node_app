@@ -38,13 +38,37 @@ router.get('/admin', function(req, res, next) {
 
 
 router.get('/addparty', function(req, res, next) {
+  console.log("HELLLLLLO!!!!")
   res.render('add_party', {});
 });
 
 
 router.post('/addparty', function(req, res, next) {
-  console.log(req.body)
-  res.json('ok')
+  modelIndex.addParty(req.body,function(err, result){
+
+        if(err)
+        {
+
+       var obj= new Object();
+       obj.status=false;
+       obj.message=err.sqlMessage;
+
+       res.json(obj);
+     }
+     else
+     {
+       var myJSON = JSON.stringify(result);
+       console.log("output "+myJSON);
+
+       var obj= new Object();
+       obj.status=true;
+       obj.result = result
+       obj.message='OK!';
+       res.json(req.body)
+
+
+     }
+  });
 
 })
 
