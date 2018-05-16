@@ -64,7 +64,7 @@ router.post('/addparty', function(req, res, next) {
        obj.status=true;
        obj.result = result
        obj.message='OK!';
-       res.json(req.body)
+       res.render('add_party', {});
 
 
      }

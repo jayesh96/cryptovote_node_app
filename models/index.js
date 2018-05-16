@@ -178,7 +178,7 @@ var INDEX = {
     party_hash_value_input = party.name+party.sname+current_date_string
     encrypted_party_hash = makehash(party_hash_key,party_hash_value_input).substring(5,25)
     console.log(encrypted_party_hash,"====>")
-    dbConnection.query("INSERT INTO election_party (registered_name,short_name,hash_address,reg_date) VALUES (?,?,?,NOW()) ",[party.name,party.sname,encrypted_party_hash],function( err, result){
+    dbConnection.query("INSERT INTO election_party (registered_name,short_name,hash_address,reg_date,party_logo) VALUES (?,?,?,NOW(),?) ",[party.name,party.sname,encrypted_party_hash,party.party_image_url],function( err, result){
       if(err){
         console.log("Some Error Occurred");
         return callback(err);

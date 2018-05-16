@@ -114,8 +114,9 @@ desired effect
 
 
            <% for (var i = 0; i < obj.result.data.length; i++) { %>
-          <div style="border-radius:20px; background-color:#367fa9 !important"class="info-box bg-yellow">
-            <span style="border-radius:20px" class="info-box-icon"></span>
+          <div style="border-radius:20px; background-color:#367fa9 !important" class="info-box bg-yellow">
+            <span style="border-radius:20px" class="info-box-icon"><img height='60' width='60' src='<%= obj.result.data[i].party_logo %>'></span> 
+
             <div class="info-box-content">
               <span class="info-box-text"><%= obj.result.data[i].registered_name %></span>
               <span class="info-box-number"><%= obj.result.data[i].short_name %></span>
